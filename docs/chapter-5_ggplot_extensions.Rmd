@@ -153,12 +153,13 @@ Galerie des extensions
 
 - [ggplot gallery](https://www.ggplot2-exts.org/gallery/) : https://www.ggplot2-exts.org/gallery/
 
-Protip : 
+Conseils :
 
-1. suivez des blog 
-2. copiez les exemples de GitHub
-3. ???
-4. profitez !
+- suivez des blogs
+  + [RStudio Blog](https://blog.rstudio.com/) 
+  + [R-bloggers](https://www.r-bloggers.com/)
+- copiez les exemples de GitHub
+- expérimentez !
 
 
 ---
