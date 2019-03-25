@@ -69,4 +69,3 @@ knitr::opts_template$set(
 ```{r, child='chapter-5_ggplot_extensions.Rmd', eval=TRUE}
 ```
 
-

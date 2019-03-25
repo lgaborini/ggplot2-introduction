@@ -6,6 +6,20 @@ class: center, middle, inverse
 
 
 ---
+
+# Ce qui reste
+
+![:package_cran gridExtra] : coller des graphiques différents dans le même graphique
+- in base R : `par(mfrow=...)` 
+- [vignette](https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html)
+
+![:package_cran ggRidges] : ridgeline plots
+- [vignette](https://cran.r-project.org/web/packages/ggridges/vignettes/gallery.html)
+
+![:package_cran gghighlight] : mise en évidence d'éléments 
+- [vignette](https://cran.r-project.org/web/packages/gghighlight/vignettes/gghighlight.html)
+
+---
 class: slide-class-advanced
 
 # plotly
@@ -37,14 +51,12 @@ library(plotly)
 
 pl <- ggplot(mtcars, aes(x = mpg, y = wt)) + geom_point()
 
-
 pl_gg <- ggplotly(pl, width=600, height=250)
 
 dir.create(here('widgets'))
 htmltools::save_html(pl_gg, file=here("widgets/plotly_figure.html"))
 ```
 <iframe src="widgets/plotly_figure.html" width="600" height="300" scrolling="no" seamless="seamless" frameBorder="0"></iframe>
-
 
 
 ---
@@ -125,8 +137,8 @@ class: slide-class-advanced
 # ggplot2 in Python
 
 Diverses implémentations de la grammaire des graphiques :
-- [`plotnine`](https://plotnine.readthedocs.io/)
-- [`ggplot`](http://ggplot.yhathq.com/)
+- 🐍 [`plotnine`](https://plotnine.readthedocs.io/)
+- 🐍 [`ggplot`](http://ggplot.yhathq.com/)
 
 ```{python, eval=FALSE}
 from ggplot import *
@@ -155,12 +167,19 @@ Galerie des extensions
 
 Conseils :
 
-- suivez des blogs
+- suivez des blogs 
   + [RStudio Blog](https://blog.rstudio.com/) 
   + [R-bloggers](https://www.r-bloggers.com/)
+  + [Timo Grossenbacher (SRF Data)](https://timogrossenbacher.ch/blog/)
+  + [SRF Data](https://srfdata.github.io/)
 - copiez les exemples de GitHub
 - expérimentez !
 
+Courses de visualisation des données 
+
+- [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/) (théorie)
+- [BBC data journalism cookbook](https://bbc.github.io/rcookbook/) (que `ggplot2`)
+- [Edward Tufte](https://www.edwardtufte.com/tufte/) : vieux (et exagéré ? )
 
 ---
 class: slide-class-advanced

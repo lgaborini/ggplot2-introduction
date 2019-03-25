@@ -1691,12 +1691,48 @@ ggplot(mtcars, aes(x = mpg, y = wt, col = factor(cyl))) +
 ![](index_files/figure-html/comb-plot-1.svg)&lt;!-- --&gt;
 
 
+---
+
+# Annotations
+
+Vous pouvez ajouter des annotations où vous voulez : 
+- couche `annotate(geom = ...)`   
+- géométrie à choix, unités du graphique
+- pas de lien avec des variables !
+
+
+```r
+ggplot(mtcars) + 
+    geom_point(aes(x = mpg, y = wt)) +
+    annotate('text', x = 29, y = 3, label = 'Du texte', size = 6) +
+    annotate("rect", xmin = 21, xmax = 30, ymin = 2, ymax = 4,
+      alpha = .2, fill = 'red')
+```
+
+![](index_files/figure-html/annotate-plot-1.svg)&lt;!-- --&gt;
+
+
+
 
 ---
 class: center, middle, inverse
 
 # Extensions
 
+
+---
+
+# Ce qui reste
+
+![:package_cran gridExtra] : coller des graphiques différents dans le même graphique
+- in base R : `par(mfrow=...)` 
+- [vignette](https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html)
+
+![:package_cran ggRidges] : ridgeline plots
+- [vignette](https://cran.r-project.org/web/packages/ggridges/vignettes/gallery.html)
+
+![:package_cran gghighlight] : mise en évidence d'éléments 
+- [vignette](https://cran.r-project.org/web/packages/gghighlight/vignettes/gghighlight.html)
 
 ---
 class: slide-class-advanced
@@ -1722,7 +1758,6 @@ pl &lt;- ggplot(mtcars, aes(x = mpg, y = wt)) + geom_point()
 
 
 &lt;iframe src="widgets/plotly_figure.html" width="600" height="300" scrolling="no" seamless="seamless" frameBorder="0"&gt;&lt;/iframe&gt;
-
 
 
 ---
@@ -1802,8 +1837,8 @@ class: slide-class-advanced
 # ggplot2 in Python
 
 Diverses implémentations de la grammaire des graphiques :
-- [`plotnine`](https://plotnine.readthedocs.io/)
-- [`ggplot`](http://ggplot.yhathq.com/)
+- 🐍 [`plotnine`](https://plotnine.readthedocs.io/)
+- 🐍 [`ggplot`](http://ggplot.yhathq.com/)
 
 
 ```python
@@ -1831,13 +1866,21 @@ Galerie des extensions
 
 - [ggplot gallery](https://www.ggplot2-exts.org/gallery/) : https://www.ggplot2-exts.org/gallery/
 
-Protip : 
+Conseils :
 
-1. suivez des blog 
-2. copiez les exemples de GitHub
-3. ???
-4. profitez !
+- suivez des blogs 
+  + [RStudio Blog](https://blog.rstudio.com/) 
+  + [R-bloggers](https://www.r-bloggers.com/)
+  + [Timo Grossenbacher (SRF Data)](https://timogrossenbacher.ch/blog/)
+  + [SRF Data](https://srfdata.github.io/)
+- copiez les exemples de GitHub
+- expérimentez !
 
+Courses de visualisation des données 
+
+- [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/) (théorie)
+- [BBC data journalism cookbook](https://bbc.github.io/rcookbook/) (que `ggplot2`)
+- [Edward Tufte](https://www.edwardtufte.com/tufte/) : vieux (et exagéré ? )
 
 ---
 class: slide-class-advanced

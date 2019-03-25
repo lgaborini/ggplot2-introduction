@@ -44,3 +44,22 @@ ggplot(mtcars, aes(x = mpg, y = wt, col = factor(cyl))) +
          geom_point() +
          my_opts   #<<
 ```
+
+
+---
+
+# Annotations
+
+Vous pouvez ajouter des annotations où vous voulez : 
+- couche `annotate(geom = ...)`   
+- géométrie à choix, unités du graphique
+- pas de lien avec des variables !
+
+```{r annotate-plot, fig.height=3}
+ggplot(mtcars) + 
+    geom_point(aes(x = mpg, y = wt)) +
+    annotate('text', x = 29, y = 3, label = 'Du texte', size = 6) +
+    annotate("rect", xmin = 21, xmax = 30, ymin = 2, ymax = 4,
+      alpha = .2, fill = 'red')
+```
+

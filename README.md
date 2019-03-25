@@ -43,3 +43,5 @@ It contains several customizations, tricks and hacks:
   Save the `plotly` object to `html` file, then manually embed it in iframe.
 
 - Embedding a previously-made `gganimate` animation by saving to `assets/img` directory (offline).
+
+- Gradient background on CSS class `slide-class-advanced` slides.
