@@ -90,7 +90,7 @@ Exemples :
 
 ### Scales vs coord\_x\_\* et coord\_y\_\*
 
-<div class="heavy-box center"><span><b>scales</b> les valeurs au delà des limites sont <b>remplacés</b> avec <span class="remark-inline-code">NA</span></span></div>
+<div class="heavy-box center"><span><b>scales</b> : les valeurs au delà des limites sont <b>remplacés</b> avec <span class="remark-inline-code">NA</span></span></div>
 
 --
 
@@ -108,7 +108,6 @@ exclude: true
 - `expand_limits(x = ..., y = ...)` : étendent le graphique jusqu'à ce(s) point(s) là   
   p.ex. `expand_limits(x = 0, y = 0)` pour inclure l'origine
    
---
 - `scale_*_*(expand = expand_scale(mult = ..., add = ...))` :   
   pour décider combien d'espace ajouter autour des bords 
 

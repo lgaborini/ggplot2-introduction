@@ -150,7 +150,7 @@ p + theme(
   axis.text.x = element_text(angle = 90))   #<<
 ```
 
---
+---
 
 # Thèmes : exemples
 
@@ -191,7 +191,7 @@ p + theme_gray()
 
 # Thèmes : exemples 
 
-Package 📦 `ggthemes` :
+Package ![:package_cran ggthemes] :
 
 - `theme_fivethirtyeight()`
 
@@ -203,7 +203,7 @@ p + ggthemes::theme_fivethirtyeight()
 
 # Thèmes : exemples 
 
-Package 📦 `ggthemes` :
+Package ![:package_cran ggthemes] :
 
 - `theme_few()`
 
@@ -215,7 +215,7 @@ p + ggthemes::theme_few()
 
 # Thèmes : exemples 
 
-Package 📦 `ggthemes` :
+Package ![:package_cran ggthemes] :
 
 - `theme_excel()`
 
