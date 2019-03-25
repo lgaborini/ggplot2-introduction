@@ -39,7 +39,7 @@ It contains several customizations, tricks and hacks:
 - some CSS popups: `assets/css/custom.css`    
   Usage: Make a `div` with class `heavy-box`
 
-- Embedding `plotly` into `xaringan` using the [`htmltools`](https://github.com/yihui/xaringan/issues/159) hack.    
+- Embedding `plotly` into `xaringan` using the 📦 [`htmltools`](https://github.com/yihui/xaringan/issues/159) hack.    
   Save the `plotly` object to `html` file, then manually embed it in iframe.
 
 - Embedding a previously-made `gganimate` animation by saving to `assets/img` directory (offline).

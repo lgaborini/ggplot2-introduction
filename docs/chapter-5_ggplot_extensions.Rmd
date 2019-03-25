@@ -149,7 +149,7 @@ class: center, middle, inverse
 
 # Pour aller plus loin...
 
-Galérie des extensions
+Galerie des extensions
 
 - [ggplot gallery](https://www.ggplot2-exts.org/gallery/) : https://www.ggplot2-exts.org/gallery/
 
@@ -170,13 +170,10 @@ class: slide-class-advanced
 
 - **Markdown** : langage simple pour rédiger du texte formaté
 - GitHub, blogs...
-
---
-
-- **R Markdown** = Markdown avec code integré
-- pour générer 
+- **R Markdown** = Markdown avec code intégré
+  pour générer 
   + pages web, blogs, articles, présentations, interfaces, livres, ... 
-- [Galérie](https://rmarkdown.rstudio.com/gallery.html)
+- [Galerie](https://rmarkdown.rstudio.com/gallery.html)
 - [Guide](https://bookdown.org/yihui/rmarkdown/) (faite avec R Markdown + ![:package_cran blogdown])
 
 ### Cette présentation 
@@ -184,5 +181,5 @@ class: slide-class-advanced
 - ![:package_cran xaringan] basé sur la librairie [reveal.js](https://revealjs.com)
 - Mélange : R Markdown + CSS (quelques détails)
 - [Documentation](http://slides.yihui.name/xaringan/) (c'est une présentation!)
-
+- [Sources](https://github.com/lgaborini/ggplot2-introduction)
 

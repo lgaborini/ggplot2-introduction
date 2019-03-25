@@ -104,11 +104,11 @@ for (cyl_sub in unique(mtcars$cyl)) {
 
 Inconvénients : 
 
-- aspéct graphique pas agréable 
+- aspect graphique pas agréable 
 
 --
 
-- méchanisme compliqué
+- mécanisme compliqué
 
 --
 

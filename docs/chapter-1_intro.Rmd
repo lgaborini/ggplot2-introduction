@@ -44,7 +44,7 @@
 
   - Ressources: 
       + [R for Data Science](https://r4ds.had.co.nz/index.html) : guide au `tidyverse`
-      + [TidyTuesday](https://github.com/rfordatascience/tidytuesday) : a weekly social data project in R
+      + [TidyTuesday](https://github.com/rfordatascience/tidytuesday) : **a weekly social data project in R**
       + [ggplot2 cookbook](http://www.cookbook-r.com/Graphs/)
 
 --

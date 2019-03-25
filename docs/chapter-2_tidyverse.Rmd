@@ -33,7 +33,7 @@ Les plus importants :
 
 --
 
-- ![:package_cran tidyr] : rangément de `data.frames`
+- ![:package_cran tidyr] : rangement de `data.frames`
 
 --
 
@@ -70,13 +70,13 @@ Auteur principal : Hadley Wickham (https://github.com/hadley/)
 
 --
 
-- le **flux d'informations** est indiqué avec l'operateur `%>%` (**pipe**)
+- le **flux d'informations** est indiqué avec l'opérateur `%>%` (**pipe**)
 
 --
 
 <div class="heavy-box">
     <pre class="code-normal code-inline">f(x,y)</pre> une fonction <br/>
-    <pre class="code-normal code-inline">x %>% f(y)</pre> est equivalent à : <pre class="code-normal code-inline">f(x,y)</pre>
+    <pre class="code-normal code-inline">x %>% f(y)</pre> est équivalent à : <pre class="code-normal code-inline">f(x,y)</pre>
 </div>
 
 - très bonne documentation : R help, sites Internet, blogs, github
@@ -84,7 +84,7 @@ Auteur principal : Hadley Wickham (https://github.com/hadley/)
 --
 
 <div class="heavy-box">
-<p><b>données rectangulaires</b> (<strong>tidy data</strong>)</p>
+<p><b>données rectangulaires</b> (<b>tidy data</b>)</p>
 <p>chaque ligne est une observation, chaque colonne est une variable</p>
 </div>
 

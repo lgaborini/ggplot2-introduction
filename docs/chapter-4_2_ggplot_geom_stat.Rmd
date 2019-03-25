@@ -2,11 +2,11 @@
 ---
 class: center, middle, inverse
 
-# Géometries
+# Géométries
 
 ---
 
-# Géometries
+# Géométries
 
 Les plus importantes :
 
@@ -23,7 +23,7 @@ Les plus importantes :
 
 --
 - `geom_polygon`, `geom_path` :   
-  un polygon ou parcours, vertices en ordre de apparition dans `data`
+  un polygone ou parcours, vertex en ordre de apparition dans `data`
 - `geom_raster`, `geom_contour` : pour données 2D
 
 --
@@ -40,7 +40,7 @@ Mini-guide : 📖 [Data visualization cheatsheet](https://github.com/rstudio/che
 
 # Esthétiques
 
-Presque toutes les géometries supportent les esthétiques :
+Presque toutes les géométries supportent les esthétiques :
 
 - `x`, `y`, `col` (bord), `fill` (remplissage), `alpha` (transparence).
 
@@ -49,7 +49,7 @@ Autres esthétiques :
 
 --
 
-- Géometries particulières :    
+- Géométries particulières :    
   `xmin`, `xmax`, `ymin`, `ymax` → ![:read_the_docs]
   
 --
@@ -141,11 +141,11 @@ Avant de plotter :
 
 --
 
-- Pour chaque sous-ensemble de `data`, le niveau `stat` calcule tout le nécéssaire
+- Pour chaque sous-ensemble de `data`, le niveau `stat` calcule tout le nécessaire
 
 --
 
-- Conséquence : à chaque `geom` corréspond un `stat` (souvent caché ! )
+- Conséquence : à chaque `geom` correspond un `stat` (souvent caché ! )
 
 --
 
@@ -170,7 +170,7 @@ p
 
 ## Les statistiques : exemple
 
-- Ajout du niveau `geom_smooth` : smoothing n
+- Ajout du niveau `geom_smooth` : smoothing
   + linéaire : `method = "lm"` (et autres)
   + non-linéaire : dans ce cas `method = "loess"` (et autres)
 --
@@ -218,7 +218,7 @@ fig_height_position <- 4
 Quand on a des **éléments superposés** : (p.ex. diagramme à barre)
 
 - Il y a une `stat_count` cachée ! (définit $y$)
-- Par défault, empilés (`geom_bar`) ou superposés (`geom_point`) 
+- Par défaut, empilés (`geom_bar`) ou superposés (`geom_point`) 
 
 ```{r, fig.height=fig_height_position}
 ggplot(mtcars) + 

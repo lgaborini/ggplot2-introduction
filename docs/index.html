@@ -79,7 +79,7 @@ layout: true
 
   - Ressources: 
       + [R for Data Science](https://r4ds.had.co.nz/index.html) : guide au `tidyverse`
-      + [TidyTuesday](https://github.com/rfordatascience/tidytuesday) : a weekly social data project in R
+      + [TidyTuesday](https://github.com/rfordatascience/tidytuesday) : **a weekly social data project in R**
       + [ggplot2 cookbook](http://www.cookbook-r.com/Graphs/)
 
 --
@@ -126,7 +126,7 @@ Les plus importants :
 
 --
 
-- ![:package_cran tidyr] : rangément de `data.frames`
+- ![:package_cran tidyr] : rangement de `data.frames`
 
 --
 
@@ -163,13 +163,13 @@ Auteur principal : Hadley Wickham (https://github.com/hadley/)
 
 --
 
-- le **flux d'informations** est indiqué avec l'operateur `%&gt;%` (**pipe**)
+- le **flux d'informations** est indiqué avec l'opérateur `%&gt;%` (**pipe**)
 
 --
 
 &lt;div class="heavy-box"&gt;
     &lt;pre class="code-normal code-inline"&gt;f(x,y)&lt;/pre&gt; une fonction &lt;br/&gt;
-    &lt;pre class="code-normal code-inline"&gt;x %&gt;% f(y)&lt;/pre&gt; est equivalent à : &lt;pre class="code-normal code-inline"&gt;f(x,y)&lt;/pre&gt;
+    &lt;pre class="code-normal code-inline"&gt;x %&gt;% f(y)&lt;/pre&gt; est équivalent à : &lt;pre class="code-normal code-inline"&gt;f(x,y)&lt;/pre&gt;
 &lt;/div&gt;
 
 - très bonne documentation : R help, sites Internet, blogs, github
@@ -177,7 +177,7 @@ Auteur principal : Hadley Wickham (https://github.com/hadley/)
 --
 
 &lt;div class="heavy-box"&gt;
-&lt;p&gt;&lt;b&gt;données rectangulaires&lt;/b&gt; (&lt;strong&gt;tidy data&lt;/strong&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;données rectangulaires&lt;/b&gt; (&lt;b&gt;tidy data&lt;/b&gt;)&lt;/p&gt;
 &lt;p&gt;chaque ligne est une observation, chaque colonne est une variable&lt;/p&gt;
 &lt;/div&gt;
 
@@ -490,11 +490,11 @@ for (cyl_sub in unique(mtcars$cyl)) {
 
 Inconvénients : 
 
-- aspéct graphique pas agréable 
+- aspect graphique pas agréable 
 
 --
 
-- méchanisme compliqué
+- mécanisme compliqué
 
 --
 
@@ -531,7 +531,7 @@ Un graphique est une combinaison d'éléments indépendants (**layers**):
 --
 
     corréspondance entre les variables dans `data` et les variables graphiques
-- &lt;b&gt;`geom`&lt;/b&gt; : un objet graphique (point, ligne, cercle,...) qui séra montré
+- &lt;b&gt;`geom`&lt;/b&gt; : un objet graphique (point, ligne, cercle,...) qui sera montré
 
 --
 
@@ -590,7 +590,7 @@ ggplot(mtcars) +
 
 - `ggtitle` : le titre
 
-- `labs` : etiquettes des axes, titre, sous-titre, ...
+- `labs` : étiquettes des axes, titre, sous-titre, ...
 
 ]
 
@@ -649,7 +649,7 @@ ggplot(mtcars) +
 
 - Le sous-groupe est la couche `facet_wrap` 
 - `ggplot` crée des sous-graphiques avec les valeurs de son argument
--  sous-graphiques automatiquément étiquetées
+-  sous-graphiques automatiquement étiquetées
 
 ]
 --
@@ -662,11 +662,11 @@ ggplot(mtcars) +
 ---
 class: center, middle, inverse
 
-# Géometries
+# Géométries
 
 ---
 
-# Géometries
+# Géométries
 
 Les plus importantes :
 
@@ -683,7 +683,7 @@ Les plus importantes :
 
 --
 - `geom_polygon`, `geom_path` :   
-  un polygon ou parcours, vertices en ordre de apparition dans `data`
+  un polygone ou parcours, vertex en ordre de apparition dans `data`
 - `geom_raster`, `geom_contour` : pour données 2D
 
 --
@@ -700,7 +700,7 @@ Mini-guide : 📖 [Data visualization cheatsheet](https://github.com/rstudio/che
 
 # Esthétiques
 
-Presque toutes les géometries supportent les esthétiques :
+Presque toutes les géométries supportent les esthétiques :
 
 - `x`, `y`, `col` (bord), `fill` (remplissage), `alpha` (transparence).
 
@@ -709,7 +709,7 @@ Autres esthétiques :
 
 --
 
-- Géometries particulières :    
+- Géométries particulières :    
   `xmin`, `xmax`, `ymin`, `ymax` → ![:read_the_docs]
   
 --
@@ -804,11 +804,11 @@ Avant de plotter :
 
 --
 
-- Pour chaque sous-ensemble de `data`, le niveau `stat` calcule tout le nécéssaire
+- Pour chaque sous-ensemble de `data`, le niveau `stat` calcule tout le nécessaire
 
 --
 
-- Conséquence : à chaque `geom` corréspond un `stat` (souvent caché ! )
+- Conséquence : à chaque `geom` correspond un `stat` (souvent caché ! )
 
 --
 
@@ -836,7 +836,7 @@ p
 
 ## Les statistiques : exemple
 
-- Ajout du niveau `geom_smooth` : smoothing n
+- Ajout du niveau `geom_smooth` : smoothing
   + linéaire : `method = "lm"` (et autres)
   + non-linéaire : dans ce cas `method = "loess"` (et autres)
 --
@@ -888,7 +888,7 @@ p +
 Quand on a des **éléments superposés** : (p.ex. diagramme à barre)
 
 - Il y a une `stat_count` cachée ! (définit `\(y\)`)
-- Par défault, empilés (`geom_bar`) ou superposés (`geom_point`) 
+- Par défaut, empilés (`geom_bar`) ou superposés (`geom_point`) 
 
 
 ```r
@@ -1021,7 +1021,7 @@ ggplot(mtcars) +
 
 --
    
-   + `expand` (`TRUE`/`FALSE`) : ajout d'espace avant/après les extrèmes
+   + `expand` (`TRUE`/`FALSE`) : ajout d'espace avant/après les extrêmes
 
 --
 
@@ -1049,12 +1049,12 @@ Correspondance entre les valeurs des **données** et les valeurs dans le **graph
 
 --
 
-Echelles aux valeurs ...
+Échelles aux valeurs ...
 
 - continues : types `numeric`, `int`, `Date`, ...
 - discrètes : tout le reste (`factor`, `char`, ...)
 
-- Noms : `scale_` + aeshétique + type d'échelle (`continuous`, `discrete`, `manual`, ...) 
+- Noms : `scale_` + esthétique + type d'échelle (`continuous`, `discrete`, `manual`, ...) 
 
 --
 
@@ -1066,11 +1066,11 @@ Toutes échelles acceptent au moins :
 
 --
 
-- `breaks` : les valeurs seuil où on trouve des droites, des signes, ... (default : intelligent)
+- `breaks` : les valeurs seuil où on trouve des droites, des signes, ... (défaut : intelligent)
 
 --
 
-- `labels` : les chaînes de caractères associées aux `breaks` (default : intelligent)
+- `labels` : les chaînes de caractères associées aux `breaks` (défaut : intelligent)
 
 --
 
@@ -1078,7 +1078,7 @@ Toutes échelles acceptent au moins :
 
 --
 
-- `limits` : les valeurs aux extrèmes (`NA` : min/max données)     
+- `limits` : les valeurs aux extrêmes (`NA` : min/max données)     
   Aussi : fonctions `xlim( )`, `ylim( )`
 
 
@@ -1828,7 +1828,7 @@ class: center, middle, inverse
 
 # Pour aller plus loin...
 
-Galérie des extensions
+Galerie des extensions
 
 - [ggplot gallery](https://www.ggplot2-exts.org/gallery/) : https://www.ggplot2-exts.org/gallery/
 
@@ -1849,13 +1849,10 @@ class: slide-class-advanced
 
 - **Markdown** : langage simple pour rédiger du texte formaté
 - GitHub, blogs...
-
---
-
-- **R Markdown** = Markdown avec code integré
-- pour générer 
+- **R Markdown** = Markdown avec code intégré
+  pour générer 
   + pages web, blogs, articles, présentations, interfaces, livres, ... 
-- [Galérie](https://rmarkdown.rstudio.com/gallery.html)
+- [Galerie](https://rmarkdown.rstudio.com/gallery.html)
 - [Guide](https://bookdown.org/yihui/rmarkdown/) (faite avec R Markdown + ![:package_cran blogdown])
 
 ### Cette présentation 
@@ -1863,6 +1860,7 @@ class: slide-class-advanced
 - ![:package_cran xaringan] basé sur la librairie [reveal.js](https://revealjs.com)
 - Mélange : R Markdown + CSS (quelques détails)
 - [Documentation](http://slides.yihui.name/xaringan/) (c'est une présentation!)
+- [Sources](https://github.com/lgaborini/ggplot2-introduction)
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

@@ -12,7 +12,7 @@
 
 --
    
-   + `expand` (`TRUE`/`FALSE`) : ajout d'espace avant/après les extrèmes
+   + `expand` (`TRUE`/`FALSE`) : ajout d'espace avant/après les extrêmes
 
 --
 
@@ -40,12 +40,12 @@ Correspondance entre les valeurs des **données** et les valeurs dans le **graph
 
 --
 
-Echelles aux valeurs ...
+Échelles aux valeurs ...
 
 - continues : types `numeric`, `int`, `Date`, ...
 - discrètes : tout le reste (`factor`, `char`, ...)
 
-- Noms : `scale_` + aeshétique + type d'échelle (`continuous`, `discrete`, `manual`, ...) 
+- Noms : `scale_` + esthétique + type d'échelle (`continuous`, `discrete`, `manual`, ...) 
 
 --
 
@@ -57,11 +57,11 @@ Toutes échelles acceptent au moins :
 
 --
 
-- `breaks` : les valeurs seuil où on trouve des droites, des signes, ... (default : intelligent)
+- `breaks` : les valeurs seuil où on trouve des droites, des signes, ... (défaut : intelligent)
 
 --
 
-- `labels` : les chaînes de caractères associées aux `breaks` (default : intelligent)
+- `labels` : les chaînes de caractères associées aux `breaks` (défaut : intelligent)
 
 --
 
@@ -69,7 +69,7 @@ Toutes échelles acceptent au moins :
 
 --
 
-- `limits` : les valeurs aux extrèmes (`NA` : min/max données)     
+- `limits` : les valeurs aux extrêmes (`NA` : min/max données)     
   Aussi : fonctions `xlim( )`, `ylim( )`
 
 

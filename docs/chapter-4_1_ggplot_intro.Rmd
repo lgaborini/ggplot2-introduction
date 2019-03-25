@@ -19,7 +19,7 @@ Un graphique est une combinaison d'éléments indépendants (**layers**):
 --
 
     corréspondance entre les variables dans `data` et les variables graphiques
-- <b>`geom`</b> : un objet graphique (point, ligne, cercle,...) qui séra montré
+- <b>`geom`</b> : un objet graphique (point, ligne, cercle,...) qui sera montré
 
 --
 
@@ -77,7 +77,7 @@ ggplot(mtcars) +
 
 - `ggtitle` : le titre
 
-- `labs` : etiquettes des axes, titre, sous-titre, ...
+- `labs` : étiquettes des axes, titre, sous-titre, ...
 
 ]
 
@@ -138,7 +138,7 @@ ggplot(mtcars) +
 
 - Le sous-groupe est la couche `facet_wrap` 
 - `ggplot` crée des sous-graphiques avec les valeurs de son argument
--  sous-graphiques automatiquément étiquetées
+-  sous-graphiques automatiquement étiquetées
 
 ]
 --
