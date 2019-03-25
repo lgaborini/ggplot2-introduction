@@ -1,0 +1,126 @@
+/* Custom CSS */
+
+.heavy-box {
+  display: block;
+  margin: 5px;
+  background: #8EBBCC;
+  border: 1px;
+  border-radius: 9px;
+  padding: 9px;
+}
+
+/* Link color */
+a, a > code {
+  color: #1482b9; /*default: rgb(249, 38, 114); || sets color of links */
+  text-decoration: none; /* turns off background coloring of links */
+  text-decoration: underline;
+}
+
+.link {
+  color: #1482b9 !important;
+}
+
+img {
+  max-width: 600px;
+}
+
+.remark-slide-content {
+  font-size: 18px;
+}
+
+.remark-inline-code {
+  color: #960101;
+}
+
+
+.small-code pre > code {
+  font-size: 14px;
+}
+
+.code-inline {
+  display: inline;
+}
+
+.img-small-25 img {
+  max-width: 25%;
+}
+
+.img-small-50 img {
+  max-width: 50%;
+}
+
+.text-small {
+  font-size: 70%;
+}
+
+.text-curse {
+  font-size: 50%;
+  font-style: italic;
+}
+
+pre {
+  overflow: hidden;
+}
+
+.python {
+  background: #dffdd6 !important;
+}
+
+/* Two column layout: code and plot */
+
+.twocol-code-plot .left-code pre > code {
+  font-size: 14px;
+}
+
+.left-code {
+  width: 38%;
+  height: 92%;
+  float: left;
+}
+.right-plot {
+  width: 60%;
+  float: right;
+  padding-left: 1%;
+}
+
+/* Code with automatic word-wrap */
+.left-code code {
+  font-size: 14px;
+  text-align: left;
+  overflow: hidden;
+  white-space: pre-wrap;       /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+/* Write inline-block content in right panel, float to the left */
+.left-inline {
+  display: inline-block;
+}
+
+
+/* Popup stuff */
+
+.image-popup-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.protip-popup {
+  position: absolute;
+  left: 50%;
+  top: 80%;
+  transform: translate(-50%, -50%);
+  background: #8EBBCC;
+  border: 1px;
+  border-radius: 23px;
+  padding: 10px;
+  width: 80%;
+  -webkit-box-shadow: 6px 10px 6px -6px #777;
+  -moz-box-shadow: 6px 10px 6px -6px #777;
+  box-shadow: 6px 10px 6px -6px #777;
+}

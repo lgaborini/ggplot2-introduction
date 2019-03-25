@@ -1,0 +1,72 @@
+---
+title: "Introduction à ggplot2"
+subtitle: "Café des doctorants"
+author: "Lorenzo Gaborini"
+date: "2019-03-26"
+output:
+  xaringan::moon_reader:
+    css: ["default", "default-fonts", "assets/css/ribbon-advanced.css", "assets/css/custom.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: true
+      beforeInit: "assets/js/macros.js"
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(here))
+
+knitr::opts_chunk$set(
+   message = FALSE, 
+   warning = FALSE,
+   fig.width = 8, 
+   fig.height = 5,
+   dev = 'svg')
+
+
+knitr::opts_template$set(
+   twocol_code = list(echo=TRUE, results='hide', fig.show="hide"),
+   twocol_plot = list(echo=FALSE, results='show', fig.width=6, fig.align='center', out.width='95%')
+)
+
+```
+
+
+```{r, child='chapter-0_layout.Rmd', eval=TRUE}
+```
+
+```{r, child='chapter-1_intro.Rmd', eval=TRUE}
+```
+
+```{r, child='chapter-2_tidyverse.Rmd', eval=TRUE}
+```
+
+```{r, child='chapter-3_graphiques.Rmd', eval=TRUE}
+```
+
+```{r, child='chapter-4_1_ggplot_intro.Rmd', eval=TRUE}
+```
+
+```{r, child='chapter-4_2_ggplot_geom_stat.Rmd', eval=TRUE}
+```
+
+```{r, child='chapter-4_3_ggplot_coord_scales.Rmd', eval=TRUE}
+```
+
+```{r, child='chapter-4_4_ggplot_facet.Rmd', eval=TRUE}
+```
+
+```{r, child='chapter-4_5_ggplot_themes.Rmd', eval=TRUE}
+```
+
+```{r, child='chapter-4_6_ggplot_extra.Rmd', eval=TRUE}
+```
+
+```{r, child='chapter-5_ggplot_extensions.Rmd', eval=TRUE}
+```
+
+

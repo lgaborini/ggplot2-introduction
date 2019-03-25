@@ -1,0 +1,148 @@
+
+---
+class: center, middle, inverse
+
+# La **grammaire des graphiques**
+
+---
+
+# Grammaire des graphiques
+
+Un graphique est une combinaison d'éléments indépendants (**layers**):
+
+- <b>`data`</b> : un jeu de données 
+
+--
+
+- <b>`aes`thetic mapping</b> :   
+
+--
+
+    corréspondance entre les variables dans `data` et les variables graphiques
+- <b>`geom`</b> : un objet graphique (point, ligne, cercle,...) qui séra montré
+
+--
+
+- <b>`position`</b> : le déplacement des objets de type `geom` (souvent: identité)
+
+--
+
+- <b>`stat`</b> : un objet qui calcule des statistiques (moyennes, ...) : (souvent: identité)
+
+--
+
+- <b>`coord`</b> : le système de cordonnées (cartésiennes, polaires, ...)
+
+--
+
+- <b>`scale`</b> : contrôle de la gamme des valeurs pour les données
+
+--
+
+- <b>`facet`</b> : ajout de sous-graphiques
+
+--
+
+- <b>`theme`</b> : réglage fin d'éléments graphiques 
+
+--
+
+- <div class='heavy-box'>Chaque graphique est une <b>somme</b> de ces niveaux.</div>
+
+---
+class: twocol-code-plot
+
+## Grammaire des graphiques : exemple 
+
+`ggplot2` est une implémentation de la grammaire des graphiques.
+
+- L'objet de base est `ggplot(data = ...)`
+
+--
+
+- Puis on y somme les autres niveaux :
+
+--
+
+.left-code[
+
+```{r ggplot-ex, opts.label="twocol_code"}
+library(ggplot2)
+
+ggplot(mtcars) +
+   geom_point(aes(x = mpg, y = wt)) +
+   ggtitle('Autonomie vs poids') +
+   labs(x = 'Autonomie', y = 'Poids')
+```
+
+- `ggtitle` : le titre
+
+- `labs` : etiquettes des axes, titre, sous-titre, ...
+
+]
+
+--
+
+.right-plot[
+
+```{r, ref.label='ggplot-ex', opts.label="twocol_plot"}
+
+```
+]
+
+---
+class: twocol-code-plot
+
+## Grammaire des graphiques : exemple avec groupes
+
+.left-code[
+```{r ggplot-group-plot, opts.label="twocol_code", eval=TRUE}
+p <- ggplot(mtcars) +
+   geom_point(aes(x = mpg, y = wt, col = cyl)) +
+   ggtitle('Autonomie vs poids; cylindres') +
+   scale_color_continuous('Nombre de cylinders')
+p
+```
+
+- `data` : `mtcars`
+- `geom_point` : ajout d'une couche graphique de type "scatter plot"   
+   Variables graphiques : `x`, `y`, `col` (couleur : facultative)
+- `aes` : **aesthetic mapping**    
+   dans `data`: `mpg`, `wt`, `cyl` ⇒ variables `x`, `y`, `col` dans le graphique
+- `ggplot` adopte une échelle de couleur automatique pour des valeurs continues
+ 
+]
+
+--
+.right-plot[
+
+```{r, opts.label="twocol_plot"}
+p
+```
+]
+---
+class: twocol-code-plot
+
+## Grammaire des graphiques : exemple
+
+L'exemple avec les sous-groupes : facile !
+
+.left-code[
+
+```{r ggplot-facet-plot, opts.label="twocol_code"}
+ggplot(mtcars) +
+   geom_point(aes(x = mpg, y = wt)) +
+   facet_wrap( ~ cyl) +
+   ggtitle('Autonomie vs poids')
+```
+
+- Le sous-groupe est la couche `facet_wrap` 
+- `ggplot` crée des sous-graphiques avec les valeurs de son argument
+-  sous-graphiques automatiquément étiquetées
+
+]
+--
+.right-plot[
+```{r, ref.label='ggplot-facet-plot', opts.label="twocol_plot"}
+```
+]

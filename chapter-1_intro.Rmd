@@ -1,0 +1,56 @@
+
+---
+
+# Buts
+
+- R moderne : nouveaux outils
+
+--
+
+- Introduction au `tidyverse`
+
+--
+
+- Familiariser avec la librairie `ggplot2`
+
+--
+
+- Extensions
+
+--
+
+- `ggplot2` est énorme : **concepts** et **autonomie** !
+
+--
+
+- Pour informations : 
+    + Stack Overflow
+    + Cheatsheets : https://www.rstudio.com/resources/cheatsheets/
+    + Documentation : https://ggplot2.tidyverse.org/reference/
+
+---
+
+# Prérequis
+
+## Logiciels
+
+  - R (nécessaire)
+
+--
+
+  - connaissances de base
+
+--
+
+  - Ressources: 
+      + [R for Data Science](https://r4ds.had.co.nz/index.html) : guide au `tidyverse`
+      + [TidyTuesday](https://github.com/rfordatascience/tidytuesday) : a weekly social data project in R
+      + [ggplot2 cookbook](http://www.cookbook-r.com/Graphs/)
+
+--
+
+  - [RStudio](https://www.rstudio.com/) (conseillé)
+      + interface complète pour **écrire**, **développer** et **produire**
+      + literate programming : **R Markdown**, articles, présentations, sites web, ...
+
+

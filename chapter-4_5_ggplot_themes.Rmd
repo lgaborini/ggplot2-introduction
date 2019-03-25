@@ -1,0 +1,265 @@
+
+---
+
+# Thèmes
+
+Avec `theme(element = valeur, ...)` vous pouvez modifier les éléments graphiques   
+(→ ![:read_the_docs])
+
+--
+
+.pull-left[.text-small[
+  ### `element`
+
+  - `title` : tous les titres
+  - `axis.title.*` : les titre des axes
+  
+  - `axis.text.*` :   
+    textes dans les marques sur les axes
+  - `axis.ticks.*` :   
+    marques sur les axes
+  - `axis.line.*` :   
+    les droites des axes
+
+  - `legend.*` :   
+    les légendes
+  - `panel.*` : fond du graphique   
+  - `plot.*` : autour le graphique
+  - `strip.*` : composants de `facets`
+  
+  - ... ![:read_the_docs]
+]
+]
+
+--
+
+.pull-right[
+
+  ### `valeur`
+
+   Tous les éléments sont du type :
+
+  - `element_line(...)` : droits
+  
+  - `element_rect(...)` :   
+    rectangles (bords, fonds)
+  
+  - `element_text(...)` : texte
+  
+  - `element_blank(...)` :   
+    pour effacer
+
+]
+
+---
+
+# Thèmes : un exemple 
+
+Base
+
+```{r theme-slide-prog-1, fig.height=4, opts.extra='style="position:absolute; top=55%"'}
+p <- ggplot(mtcars, aes(x = mpg, y = wt, col = factor(cyl))) + 
+   geom_point() + 
+   ggtitle('Autonomie vs poids') + 
+   scale_color_discrete('Cylindres') +
+   labs(x = 'Autonomie', y = 'Poids') +
+   facet_grid(am ~ gear, labeller = label_both)
+p #<<
+```
+
+
+---
+
+# Thèmes : un exemple 
+
+Titre gras
+
+```{r theme-slide-prog-2, fig.height=4, opts.extra='style="position:absolute; top=55%", eval=FALSE'}
+p + theme(
+  plot.title = element_text(face = 'bold'))   #<<
+```
+
+---
+
+# Thèmes : un exemple 
+
+Sans le fond
+
+```{r theme-slide-prog-3, fig.height=4, opts.extra='style="position:absolute; top=55%"'}
+p + theme(
+  plot.title = element_text(face = 'bold'),
+  panel.background = element_blank())   #<<
+```
+
+---
+
+# Thèmes : un exemple 
+
+Avec axes 
+
+```{r theme-slide-prog-4, fig.height=4, opts.extra='style="position:absolute; top=55%"'}
+p + theme(
+  plot.title = element_text(face = 'bold'),
+  panel.background = element_blank(),
+  axis.line = element_line(size = 1))   #<<
+```
+
+---
+
+# Thèmes : un exemple 
+
+Fond des onglets
+
+```{r theme-slide-prog-5, fig.height=4, opts.extra='style="position:absolute; top=55%"'}
+p + theme(
+  plot.title = element_text(face = 'bold'),
+  panel.background = element_blank(),
+  axis.line = element_line(size = 1),
+  strip.background = element_rect(fill = 'black'))   #<<
+```
+
+---
+
+# Thèmes : un exemple 
+
+Texte des onglets
+
+```{r theme-slide-prog-6, fig.height=4, opts.extra='style="position:absolute; top=55%"'}
+p + theme(
+  plot.title = element_text(face = 'bold'),
+  panel.background = element_blank(),
+  axis.line = element_line(size = 1),
+  strip.background = element_rect(fill = 'black'),
+  strip.text = element_text(color = 'white', face = 'bold'))   #<<
+```
+
+
+---
+
+# Thèmes : un exemple 
+
+Etiquettes axe x  
+
+```{r theme-slide-prog-7, fig.height=4, opts.extra='style="position:absolute; top=55%"'}
+p + theme(
+  plot.title = element_text(face = 'bold'),
+  panel.background = element_blank(),
+  axis.line = element_line(size = 1),
+  strip.background = element_rect(fill = 'black'),
+  strip.text = element_text(color = 'white', face = 'bold'),
+  axis.text.x = element_text(angle = 90))   #<<
+```
+
+--
+
+# Thèmes : exemples
+
+Inclus : 
+
+- `theme_bw()` : noir et blanc
+
+```{r, echo = FALSE}
+p + theme_bw()
+```
+
+---
+
+# Thèmes : exemples 
+
+Inclus : 
+
+- `theme_minimal()` : minimaliste
+
+```{r, echo = FALSE}
+p + theme_minimal()
+```
+
+
+---
+
+# Thèmes : exemples 
+
+Inclus : 
+
+- `theme_gray()` : gris
+
+```{r, echo = FALSE}
+p + theme_gray()
+```
+
+---
+
+# Thèmes : exemples 
+
+Package 📦 `ggthemes` :
+
+- `theme_fivethirtyeight()`
+
+```{r, echo = FALSE}
+p + ggthemes::theme_fivethirtyeight()
+```
+
+---
+
+# Thèmes : exemples 
+
+Package 📦 `ggthemes` :
+
+- `theme_few()`
+
+```{r, echo = FALSE}
+p + ggthemes::theme_few()
+```
+
+---
+
+# Thèmes : exemples 
+
+Package 📦 `ggthemes` :
+
+- `theme_excel()`
+
+```{r, echo = FALSE}
+p + ggthemes::theme_excel()
+```
+
+--
+
+<img src="https://media0.giphy.com/media/njl60xjwgrkWY/giphy.gif?cid=3640f6095c981f27764b434a323926c1" width="60%" class='image-popup-center'/>
+
+
+---
+class: twocol-code-plot
+
+#  Thèmes : composition
+
+.left-code[
+### Construction
+
+Les thèmes sont composables :
+```{r theme-plus, opts.label="twocol_code", results='hide', fig.show='hide'}
+my_theme <- theme_bw() + 
+   theme(plot.title = element_text(colour = 'red'))
+
+p + my_theme
+```
+
+### Réglage globale
+
+Pour changer toutes les graphiques :
+
+```{r theme-set, opts.label="twocol_code", eval=FALSE}
+ggplot2::theme_set(my_theme)
+```
+]
+
+--
+
+.right-plot[
+
+```{r theme-plus-plot, opts.label="twocol_plot", echo=FALSE}
+p + my_theme
+```
+
+]
+

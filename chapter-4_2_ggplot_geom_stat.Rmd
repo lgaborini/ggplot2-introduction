@@ -1,0 +1,316 @@
+
+---
+class: center, middle, inverse
+
+# Géometries
+
+---
+
+# Géometries
+
+Les plus importantes :
+
+- `geom_point` : points
+- `geom_line` : lignes
+- `geom_text`, `geom_label` : du texte   
+
+--
+- `geom_abline`, `geom_vline`, `geom_hline` :   
+  lignes selon pente / intersection avec les axes   
+--
+
+- `geom_histogram`, `geom_boxplot`, `geom_density`   
+
+--
+- `geom_polygon`, `geom_path` :   
+  un polygon ou parcours, vertices en ordre de apparition dans `data`
+- `geom_raster`, `geom_contour` : pour données 2D
+
+--
+Mini-guide : 📖 [Data visualization cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)   
+--
+
+### Anatomie d'une géometrie :  
+
+- `geom_*(mapping = ..., data = ..., stat = ..., position = ..., ...)`
+- `mapping` spécifie les **esthétiques** (correspondances entre variables)
+- `data = ...` est utile pour lire un `data` modifié
+
+---
+
+# Esthétiques
+
+Presque toutes les géometries supportent les esthétiques :
+
+- `x`, `y`, `col` (bord), `fill` (remplissage), `alpha` (transparence).
+
+Autres esthétiques :  
+- `shape`, `lwd` (poids des lignes), `lty` (type des lignes), `size` (dimension des objets), ...
+
+--
+
+- Géometries particulières :    
+  `xmin`, `xmax`, `ymin`, `ymax` → ![:read_the_docs]
+  
+--
+
+- On peut les spécifier ailleurs :
+  `geom_*(aes(...))`, ou `ggplot2(aes(...))` (partagées parmi les `geoms`)
+
+--
+
+- Variables non in `data` : placés en dehors de `aes`
+
+```{r ggplot-aes, eval=FALSE}
+my_size <- 0.5
+ggplot(mtcars, aes(x = mpg, y = wt)) +
+  geom_point(aes(col = cyl), size = my_size) #<<
+```
+
+
+---
+
+# Esthétiques
+
+Vous pouvez utiliser des expressions :
+
+.small-code[
+```{r, fig.height=4}
+ggplot(mtcars) +
+    geom_point(
+      aes(x = qsec, y = mpg, 
+          col = hp/wt,     #<<
+          shape = factor(am)),  #<<
+      size = 5) +
+    labs(title = 'Rapport puissance/poids', x = 'Mile time [s]', y = 'Autonomie')
+```
+]
+
+---
+class: twocol-code-plot
+
+# Un boxplot...
+
+Consommation vs nombre de cylindres
+
+.left-code[
+
+```{r boxplot-exemple, opts.label='twocol_code'}
+mtcars %>% 
+   ggplot(aes(x = factor(cyl), y = mpg)) + 
+   geom_boxplot(aes(fill = factor(cyl))) +
+   labs(x = 'Cylindres', y = 'Autonomie')
+```
+
+`labs(...)` : titres des axes
+
+]
+.right-plot[
+
+```{r boxplot-plot, ref.label='boxplot-exemple', opts.label = 'twocol_plot'}
+
+```
+]
+
+--
+
+.left-inline[
+Boxplot : médiane, quartiles, moustaches
+]
+
+--
+
+.left-inline[
+... mais qui les a calculés ?
+]
+
+---
+class: center, middle, inverse
+
+# Les statistiques
+
+---
+
+# Les statistiques
+
+Avant de plotter :
+
+- `data` est séparé en groupes selon les variables discrètes :
+    + ce qu'on trouve dans `facets`
+    + ce qu'on assigne à `col`, `fill`, `group`, ...
+
+--
+
+- Pour chaque sous-ensemble de `data`, le niveau `stat` calcule tout le nécéssaire
+
+--
+
+- Conséquence : à chaque `geom` corréspond un `stat` (souvent caché ! )
+
+--
+
+En pratique :
+
+- `stat` ajoute des **colonnes** à `data` avec des noms fixes
+
+---
+
+## Les statistiques : exemple
+
+Consommation vs poids : notez les esthétiques partagées
+
+```{r geom-smooth-pre}
+p <- ggplot(mtcars, aes(x = mpg, y = wt)) + 
+     geom_point()
+p
+```
+
+
+---
+
+## Les statistiques : exemple
+
+- Ajout du niveau `geom_smooth` : smoothing n
+  + linéaire : `method = "lm"` (et autres)
+  + non-linéaire : dans ce cas `method = "loess"` (et autres)
+--
+
+- `geom_smooth` adore `stat_smooth` :
+    + calcule les prédictions `y`, intervalles `ymin`, `ymax`, erreur `se`
+    + représentation graphique optimale
+
+```{r geom-smooth, fig.height=4}
+p + geom_smooth(method = 'loess')
+```
+
+---
+class: slide-class-advanced
+
+## Les statistiques : exemple
+
+- On peut accéder aux valeurs avec `stat(...)` dans le même niveau !   
+  (vieux code : les nouvelles variables commencent par `...`)
+
+--
+
+- Moyenne + intervalles de confiance pour la moyenne, $6\sigma$
+
+.small-code[
+```{r stat-manual, fig.height=4}
+p + 
+  geom_errorbar(aes(ymin = y - 3*stat(se), ymax = y + 3*stat(se), col = stat(se)), 
+                alpha = 0.2,
+                stat = 'smooth', method = 'loess') +
+  scale_color_gradient('Standard error', low = 'blue', high = 'red')
+```
+]
+
+
+
+---
+
+# Position
+
+```{r, include=FALSE}
+fig_height_position <- 4
+```
+
+Quand on a des **éléments superposés** : (p.ex. diagramme à barre)
+
+- Il y a une `stat_count` cachée ! (définit $y$)
+- Par défault, empilés (`geom_bar`) ou superposés (`geom_point`) 
+
+```{r, fig.height=fig_height_position}
+ggplot(mtcars) + 
+  geom_bar(aes(x = factor(cyl), fill = factor(am)))
+```
+
+---
+
+# Position
+
+Paramètre `position` :
+
+- `dodge` : à coté
+
+```{r, fig.height=fig_height_position}
+ggplot(mtcars) + 
+  geom_bar(aes(x = factor(cyl), fill = factor(am)),
+           position = 'dodge')  #<<
+```
+
+---
+
+# Position
+
+Paramètre `position` :
+
+- `fill` : normalise
+
+```{r, fig.height=fig_height_position}
+ggplot(mtcars) + 
+  geom_bar(aes(x = factor(cyl), fill = factor(am)),
+           position = 'fill')  #<<
+```
+
+---
+
+# Position
+
+Paramètre `position` :
+
+- `stack` : empiler
+
+```{r, fig.height=fig_height_position}
+ggplot(mtcars) + 
+  geom_bar(aes(x = factor(cyl), fill = factor(am)),
+           position = 'stack')  #<<
+```
+
+
+---
+
+# Position
+
+Paramètre `position` :
+
+- `jitter` : ajout du bruit pour séparer
+
+```{r, fig.height=fig_height_position}
+ggplot(mtcars) + 
+  geom_point(aes(x = am, y = vs))
+```
+
+---
+
+# Position
+
+Paramètre `position` :
+
+- `jitter` : ajout du bruit pour séparer
+
+```{r, fig.height=fig_height_position}
+ggplot(mtcars) + 
+  geom_point(aes(x = am, y = vs),
+           position = 'jitter') #<<
+```
+
+
+---
+class: small-code
+
+# Position
+
+Paramètre `position` :
+
+- `jitter` : ajout du bruit pour séparer   
+  Réglage ou `geom_jitter()`
+
+```{r, fig.height=fig_height_position}
+ggplot(mtcars) + 
+  geom_point(aes(x = am, y = vs),
+             position = position_jitter(width = 0.1, height = 0.1)) #<<
+```
+
+
+  

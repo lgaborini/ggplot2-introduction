@@ -1,0 +1,124 @@
+
+---
+class: center, middle, inverse
+
+# Les graphiques
+
+---
+
+# R: base graphics
+
+Ce qu'on apprend aux premiers courses : "`base`"
+
+--
+
+(p.ex. données : `mtcars`, caractéristiques de 32 automobiles)
+
+- Scatter plot, points et lignes    
+  `plot(x = mtcars$mpg, y = mtcars$wt, col = ..., pch = ..., ...)`   
+  `lines(x = mtcars$mpg, y = mtcars$wt, col = ..., pch = ..., ...)`   
+  `points(x = mtcars$mpg, y = mtcars$wt, col = ..., pch = ..., ...)`
+
+- Diagrammes à barres    
+  `hist(x = mtcars$mpg)`
+
+- Densité    
+  `plot(density(x = mtcars$wt))`
+
+- Boxplot   
+  `boxplot(mtcars$wt)`
+
+---
+
+# R: base graphics
+
+Exemple : 
+
+```{r plot-base, fig.align = 'center'}
+plot(x = mtcars$mpg, y = mtcars$wt, type = 'p', col = 'red')
+title('Poids vs. consommation')
+```
+
+---
+class: twocol-code-plot
+
+# R: base graphics, groupes
+
+Avec **données groupées** ça se complique !
+
+Exemple : (coloration par cylindres)
+
+.left-code[
+```{r base-group-plot, opts.label="twocol_code"}
+
+# Couleurs ici
+cols <- mtcars$cyl
+cols[mtcars$cyl == 4] <- 'red'
+cols[mtcars$cyl == 6] <- 'black'
+cols[mtcars$cyl == 8] <- 'blue'
+
+plot(x = mtcars$mpg, y = mtcars$wt, 
+     type = 'p', col = cols)
+title('Poids vs. consommation')
+legend('topright', 
+       c('4 cyl', '6 cyl', '8 cyl'), 
+       fill = c('red', 'black', 'blue'))
+```
+]
+
+--
+
+.right-plot[
+```{r, ref.label='base-group-plot', opts.label="twocol_plot", fig.width=5}
+```
+]
+
+---
+class: twocol-code-plot
+
+# R: base graphics, multiples
+
+.left-code[
+
+Graphiques multiples : il faut un cycle...
+
+```{r base-multiple-plot, opts.label="twocol_code"}
+par(mfrow = c(3,1))
+for (cyl_sub in unique(mtcars$cyl)) {
+   mtcars_sub <- mtcars[mtcars$cyl == cyl_sub, ]
+   plot(x = mtcars_sub$mpg, y = mtcars_sub$wt, type = 'p')
+   title(paste('Poids vs consommation:', cyl_sub, 'cylindres'))
+}
+```
+
+]
+.right-plot[
+
+```{r, ref.label="base-multiple-plot", opts.label="twocol_plot", fig.width=4}
+
+```
+]
+---
+
+# R: base graphics
+
+Inconvénients : 
+
+- aspéct graphique pas agréable 
+
+--
+
+- méchanisme compliqué
+
+--
+
+- interface pas uniforme
+
+--
+
+- duplication et répétition : $\mathrm{Pr}(\text{erreur})$ augmente !
+
+--
+
+- ...
+

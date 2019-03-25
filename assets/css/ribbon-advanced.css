@@ -1,0 +1,58 @@
+/* Ribbon for advanced slides
+
+Contains also code to tie to advanced slide class.
+
+Source: https://www.cssportal.com/css-ribbon-generator/
+*/
+
+.ribbon-advanced-box {
+  width: 200px; height: 300px;
+  position: relative;
+  border: 1px solid #BBB;
+  background: #EEE;
+}
+.ribbon-advanced {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  z-index: 1;
+  overflow: hidden;
+  width: 125px;
+  height: 125px;
+  text-align: right;
+}
+.ribbon-advanced span {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 35px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  width: 174px;
+  display: block;
+  background: #79A70A;
+  background: linear-gradient(#ec210c 0%, #921407 100%);
+  box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 32px;
+  right: -39px;
+}
+.ribbon-advanced span::before {
+  display: none;
+}
+.ribbon-advanced span::after {
+  display: none;
+}
+
+
+/* Hide ribbon by default */
+
+.remark-slide .ribbon-advanced {
+	display: none;
+}
+
+.remark-slide .slide-class-advanced .ribbon-advanced {
+	display: block;
+}

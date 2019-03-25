@@ -1,0 +1,1957 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Introduction à ggplot2</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Lorenzo Gaborini" />
+    <meta name="date" content="2019-03-26" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets\css\ribbon-advanced.css" type="text/css" />
+    <link rel="stylesheet" href="assets\css\custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Introduction à ggplot2
+## Café des doctorants
+### Lorenzo Gaborini
+### 2019-03-26
+
+---
+
+
+
+
+
+
+
+---
+layout: true
+
+&lt;div class="ribbon-advanced"&gt;&lt;span&gt;Advanced!&lt;/span&gt;&lt;/div&gt;
+
+
+
+---
+
+# Buts
+
+- R moderne : nouveaux outils
+
+--
+
+- Introduction au `tidyverse`
+
+--
+
+- Familiariser avec la librairie `ggplot2`
+
+--
+
+- Extensions
+
+--
+
+- `ggplot2` est énorme : **concepts** et **autonomie** !
+
+--
+
+- Pour informations : 
+    + Stack Overflow
+    + Cheatsheets : https://www.rstudio.com/resources/cheatsheets/
+    + Documentation : https://ggplot2.tidyverse.org/reference/
+
+---
+
+# Prérequis
+
+## Logiciels
+
+  - R (nécessaire)
+
+--
+
+  - connaissances de base
+
+--
+
+  - Ressources: 
+      + [R for Data Science](https://r4ds.had.co.nz/index.html) : guide au `tidyverse`
+      + [TidyTuesday](https://github.com/rfordatascience/tidytuesday) : a weekly social data project in R
+      + [ggplot2 cookbook](http://www.cookbook-r.com/Graphs/)
+
+--
+
+  - [RStudio](https://www.rstudio.com/) (conseillé)
+      + interface complète pour **écrire**, **développer** et **produire**
+      + literate programming : **R Markdown**, articles, présentations, sites web, ...
+
+
+
+
+
+---
+class: inverse, middle, center
+
+# R : les bases
+
+---
+
+# R moderne : le tidyverse
+
+-  ![:package_cran tidyverse] : écosystème de packages qui travaillent bien ensemble
+
+![](assets/img/tidyverse1.png) et autres...
+
+--
+
+- Installation et chargement :   
+  `install.packages("tidyverse")`   
+  `library(tidyverse)`
+
+&lt;!-- 
+- `apply`, `sapply`, `vapply`, ... : remplacés par `purrr::map`     
+    `df[df$col == 'a', ]` &lt;span class='text-curse'&gt;(combien de `[` ??? )&lt;/span&gt; : remplacé par `df %&gt;% filter(col == 'a')`
+ --&gt;
+
+---
+
+# R moderne : le tidyverse
+
+Les plus importants :
+
+-  ![:package_cran readr] : lecture des données de fichiers (conversion en `data.frames`)
+
+--
+
+- ![:package_cran tidyr] : rangément de `data.frames`
+
+--
+
+- ![:package_cran dplyr] : manipulation de `data.frames` :   
+   + filtrage, transformations, regroupage (voir : `plyr`, mais mieux !)
+
+--
+
+- ![:package_cran ggplot2] : visualisation de données
+
+--
+
+Auteur principal : Hadley Wickham (https://github.com/hadley/)
+
+
+---
+
+## Caractéristiques communes
+
+- Le premier paramètre de chaque fonction est un `data.frame` qui contient l'information
+
+--
+
+- la valeur de retour est toujours un `data.frame` (ou `tibble`)
+
+--
+
+- fonctions faciles et prévisibles :   
+  p.ex., `read_csv`, `mutate`, `select`, `summarize`, `filter`, `geom_point`, `geom_line`
+
+--
+    
+- comportement prévisible : paramètres et valeurs de retour, erreurs, ...
+
+--
+
+- le **flux d'informations** est indiqué avec l'operateur `%&gt;%` (**pipe**)
+
+--
+
+&lt;div class="heavy-box"&gt;
+    &lt;pre class="code-normal code-inline"&gt;f(x,y)&lt;/pre&gt; une fonction &lt;br/&gt;
+    &lt;pre class="code-normal code-inline"&gt;x %&gt;% f(y)&lt;/pre&gt; est equivalent à : &lt;pre class="code-normal code-inline"&gt;f(x,y)&lt;/pre&gt;
+&lt;/div&gt;
+
+- très bonne documentation : R help, sites Internet, blogs, github
+
+--
+
+&lt;div class="heavy-box"&gt;
+&lt;p&gt;&lt;b&gt;données rectangulaires&lt;/b&gt; (&lt;strong&gt;tidy data&lt;/strong&gt;)&lt;/p&gt;
+&lt;p&gt;chaque ligne est une observation, chaque colonne est une variable&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+# R moderne : exemple
+
+Données sur les vols de New York en 2013 : ![:package_cran nycflights13]
+
+--
+
+
+```r
+library(nycflights13)
+head(flights, 4)
+```
+
+```
+## # A tibble: 4 x 19
+##    year month   day dep_time sched_dep_time dep_delay arr_time
+##   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
+## 1  2013     1     1      517            515         2      830
+## 2  2013     1     1      533            529         4      850
+## 3  2013     1     1      542            540         2      923
+## 4  2013     1     1      544            545        -1     1004
+## # ... with 12 more variables: sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;,
+## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;,
+## #   time_hour &lt;dttm&gt;
+```
+
+---
+
+# R moderne : exemple
+
+Devinez le résultat !
+
+
+```r
+df &lt;- flights %&gt;% 
+   filter(month %in% c(12, 1, 2)) %&gt;% 
+   group_by(dest) %&gt;% 
+   summarise(
+      count = n(),
+      dist = mean(distance, na.rm = TRUE),
+      delay = mean(arr_delay, na.rm = TRUE)
+   ) %&gt;% 
+   filter(count &gt; 20, dest != "HNL")
+```
+
+(on a utilisé `dplyr` : fonctions `filter`, `group_by`, `summarise`, `n` et `%&gt;%`)
+
+---
+
+# R moderne : exemple
+
+Voilà :
+
+
+```r
+head(df, 10)
+```
+
+```
+## # A tibble: 10 x 4
+##    dest  count  dist delay
+##    &lt;chr&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 ABQ      31 1826  30.3 
+##  2 ALB     174  143  26.8 
+##  3 ATL    4126  757.  9.14
+##  4 AUS     521 1515. 13.4 
+##  5 AVL      31  583  12.1 
+##  6 BDL     112  116  11.3 
+##  7 BGR      56  378  19.7 
+##  8 BHM      58  866  17.5 
+##  9 BNA    1358  759. 16.6 
+## 10 BOS    3586  191.  3.25
+```
+
+---
+
+# R moderne : exemple
+
+`nycflights13` contient aussi des informations sur les aéroports :
+
+
+```r
+head(airports, 5)
+```
+
+```
+## # A tibble: 5 x 8
+##   faa   name                      lat   lon   alt    tz dst   tzone        
+##   &lt;chr&gt; &lt;chr&gt;                   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;        
+## 1 04G   Lansdowne Airport        41.1 -80.6  1044    -5 A     America/New_~
+## 2 06A   Moton Field Municipal ~  32.5 -85.7   264    -6 A     America/Chic~
+## 3 06C   Schaumburg Regional      42.0 -88.1   801    -6 A     America/Chic~
+## 4 06N   Randall Airport          41.4 -74.4   523    -5 A     America/New_~
+## 5 09J   Jekyll Island Airport    31.1 -81.4    11    -5 A     America/New_~
+```
+
+---
+
+# R moderne : exemple
+
+Jointures avec `dplyr` :
+
+
+```r
+df_airports &lt;- df %&gt;% 
+   left_join(airports, by = c('dest' = 'faa'))
+```
+
+```
+## # A tibble: 7 x 11
+##   dest  count  dist delay name          lat    lon   alt    tz dst   tzone 
+##   &lt;chr&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+## 1 ABQ      31 1826  30.3  Albuquerqu~  35.0 -107.   5355    -7 A     Ameri~
+## 2 ALB     174  143  26.8  Albany Intl  42.7  -73.8   285    -5 A     Ameri~
+## 3 ATL    4126  757.  9.14 Hartsfield~  33.6  -84.4  1026    -5 A     Ameri~
+## 4 AUS     521 1515. 13.4  Austin Ber~  30.2  -97.7   542    -6 A     Ameri~
+## 5 AVL      31  583  12.1  Asheville ~  35.4  -82.5  2165    -5 A     Ameri~
+## 6 BDL     112  116  11.3  Bradley In~  41.9  -72.7   173    -5 A     Ameri~
+## 7 BGR      56  378  19.7  Bangor Intl  44.8  -68.8   192    -5 A     Ameri~
+```
+
+---
+
+# R moderne : exemple
+
+Visualisation avec `ggplot2` :
+
+
+```r
+library(sf)
+library(maps)
+
+# Read the USA map
+us_states &lt;- sf::st_as_sf(
+   maps::map("state", plot = FALSE, fill = TRUE)
+)
+
+p &lt;- df_airports %&gt;% 
+   ggplot() +
+   geom_sf(data = us_states) +
+   geom_point(aes(x = lon, y = lat, size = delay)) +
+   ggtitle('Winter average delays from NYC') +
+   labs(x = '', y = '') +
+   scale_size_continuous('Delay [min]')
+```
+
+
+---
+class: middle
+
+# R moderne : exemple
+
+&lt;img src="index_files/figure-html/us-plot-show-1.svg" style="max-width: 100%" /&gt;
+
+
+
+
+---
+class: center, middle, inverse
+
+# La grammaire des données
+
+---
+
+# R : dplyr
+
+**Grammaire des données**
+
+- Juste quelques notions !
+
+--
+
+- Les données sont des `data.frame` (`tibble`)
+
+--
+
+- **verbes** qui les transforment
+
+--
+
+   + filtrage par lignes : `filter`
+   + filtrage par colonnes : `select`
+   + ajout de colonnes : `mutate`, `rename`
+   + groupage de lignes : `group_by`
+   + rangement : `arrange`
+   + résumé : `summarise`
+
+- Connexions avec les bases des données plus commmunes (p.ex. sqlite)
+
+--
+
+- Paradigme **split-apply-combine**
+
+--
+
+   + données → "je regroupe → je transforme → je simplifie"
+
+&lt;!-- TODO: spread/gather, quite important! --&gt;
+
+
+
+---
+class: center, middle, inverse
+
+# Les graphiques
+
+---
+
+# R: base graphics
+
+Ce qu'on apprend aux premiers courses : "`base`"
+
+--
+
+(p.ex. données : `mtcars`, caractéristiques de 32 automobiles)
+
+- Scatter plot, points et lignes    
+  `plot(x = mtcars$mpg, y = mtcars$wt, col = ..., pch = ..., ...)`   
+  `lines(x = mtcars$mpg, y = mtcars$wt, col = ..., pch = ..., ...)`   
+  `points(x = mtcars$mpg, y = mtcars$wt, col = ..., pch = ..., ...)`
+
+- Diagrammes à barres    
+  `hist(x = mtcars$mpg)`
+
+- Densité    
+  `plot(density(x = mtcars$wt))`
+
+- Boxplot   
+  `boxplot(mtcars$wt)`
+
+---
+
+# R: base graphics
+
+Exemple : 
+
+
+```r
+plot(x = mtcars$mpg, y = mtcars$wt, type = 'p', col = 'red')
+title('Poids vs. consommation')
+```
+
+&lt;img src="index_files/figure-html/plot-base-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+class: twocol-code-plot
+
+# R: base graphics, groupes
+
+Avec **données groupées** ça se complique !
+
+Exemple : (coloration par cylindres)
+
+.left-code[
+
+```r
+# Couleurs ici
+cols &lt;- mtcars$cyl
+cols[mtcars$cyl == 4] &lt;- 'red'
+cols[mtcars$cyl == 6] &lt;- 'black'
+cols[mtcars$cyl == 8] &lt;- 'blue'
+
+plot(x = mtcars$mpg, y = mtcars$wt, 
+     type = 'p', col = cols)
+title('Poids vs. consommation')
+legend('topright', 
+       c('4 cyl', '6 cyl', '8 cyl'), 
+       fill = c('red', 'black', 'blue'))
+```
+]
+
+--
+
+.right-plot[
+&lt;img src="index_files/figure-html/unnamed-chunk-17-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: twocol-code-plot
+
+# R: base graphics, multiples
+
+.left-code[
+
+Graphiques multiples : il faut un cycle...
+
+
+```r
+par(mfrow = c(3,1))
+for (cyl_sub in unique(mtcars$cyl)) {
+   mtcars_sub &lt;- mtcars[mtcars$cyl == cyl_sub, ]
+   plot(x = mtcars_sub$mpg, y = mtcars_sub$wt, type = 'p')
+   title(paste('Poids vs consommation:', cyl_sub, 'cylindres'))
+}
+```
+
+]
+.right-plot[
+
+&lt;img src="index_files/figure-html/unnamed-chunk-18-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+]
+---
+
+# R: base graphics
+
+Inconvénients : 
+
+- aspéct graphique pas agréable 
+
+--
+
+- méchanisme compliqué
+
+--
+
+- interface pas uniforme
+
+--
+
+- duplication et répétition : `\(\mathrm{Pr}(\text{erreur})\)` augmente !
+
+--
+
+- ...
+
+
+
+
+---
+class: center, middle, inverse
+
+# La **grammaire des graphiques**
+
+---
+
+# Grammaire des graphiques
+
+Un graphique est une combinaison d'éléments indépendants (**layers**):
+
+- &lt;b&gt;`data`&lt;/b&gt; : un jeu de données 
+
+--
+
+- &lt;b&gt;`aes`thetic mapping&lt;/b&gt; :   
+
+--
+
+    corréspondance entre les variables dans `data` et les variables graphiques
+- &lt;b&gt;`geom`&lt;/b&gt; : un objet graphique (point, ligne, cercle,...) qui séra montré
+
+--
+
+- &lt;b&gt;`position`&lt;/b&gt; : le déplacement des objets de type `geom` (souvent: identité)
+
+--
+
+- &lt;b&gt;`stat`&lt;/b&gt; : un objet qui calcule des statistiques (moyennes, ...) : (souvent: identité)
+
+--
+
+- &lt;b&gt;`coord`&lt;/b&gt; : le système de cordonnées (cartésiennes, polaires, ...)
+
+--
+
+- &lt;b&gt;`scale`&lt;/b&gt; : contrôle de la gamme des valeurs pour les données
+
+--
+
+- &lt;b&gt;`facet`&lt;/b&gt; : ajout de sous-graphiques
+
+--
+
+- &lt;b&gt;`theme`&lt;/b&gt; : réglage fin d'éléments graphiques 
+
+--
+
+- &lt;div class='heavy-box'&gt;Chaque graphique est une &lt;b&gt;somme&lt;/b&gt; de ces niveaux.&lt;/div&gt;
+
+---
+class: twocol-code-plot
+
+## Grammaire des graphiques : exemple 
+
+`ggplot2` est une implémentation de la grammaire des graphiques.
+
+- L'objet de base est `ggplot(data = ...)`
+
+--
+
+- Puis on y somme les autres niveaux :
+
+--
+
+.left-code[
+
+
+```r
+library(ggplot2)
+
+ggplot(mtcars) +
+   geom_point(aes(x = mpg, y = wt)) +
+   ggtitle('Autonomie vs poids') +
+   labs(x = 'Autonomie', y = 'Poids')
+```
+
+- `ggtitle` : le titre
+
+- `labs` : etiquettes des axes, titre, sous-titre, ...
+
+]
+
+--
+
+.right-plot[
+
+&lt;img src="index_files/figure-html/unnamed-chunk-19-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: twocol-code-plot
+
+## Grammaire des graphiques : exemple avec groupes
+
+.left-code[
+
+```r
+p &lt;- ggplot(mtcars) +
+   geom_point(aes(x = mpg, y = wt, col = cyl)) +
+   ggtitle('Autonomie vs poids; cylindres') +
+   scale_color_continuous('Nombre de cylinders')
+p
+```
+
+- `data` : `mtcars`
+- `geom_point` : ajout d'une couche graphique de type "scatter plot"   
+   Variables graphiques : `x`, `y`, `col` (couleur : facultative)
+- `aes` : **aesthetic mapping**    
+   dans `data`: `mpg`, `wt`, `cyl` ⇒ variables `x`, `y`, `col` dans le graphique
+- `ggplot` adopte une échelle de couleur automatique pour des valeurs continues
+ 
+]
+
+--
+.right-plot[
+
+&lt;img src="index_files/figure-html/unnamed-chunk-20-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+]
+---
+class: twocol-code-plot
+
+## Grammaire des graphiques : exemple
+
+L'exemple avec les sous-groupes : facile !
+
+.left-code[
+
+
+```r
+ggplot(mtcars) +
+   geom_point(aes(x = mpg, y = wt)) +
+   facet_wrap( ~ cyl) +
+   ggtitle('Autonomie vs poids')
+```
+
+- Le sous-groupe est la couche `facet_wrap` 
+- `ggplot` crée des sous-graphiques avec les valeurs de son argument
+-  sous-graphiques automatiquément étiquetées
+
+]
+--
+.right-plot[
+&lt;img src="index_files/figure-html/unnamed-chunk-21-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+]
+
+
+
+---
+class: center, middle, inverse
+
+# Géometries
+
+---
+
+# Géometries
+
+Les plus importantes :
+
+- `geom_point` : points
+- `geom_line` : lignes
+- `geom_text`, `geom_label` : du texte   
+
+--
+- `geom_abline`, `geom_vline`, `geom_hline` :   
+  lignes selon pente / intersection avec les axes   
+--
+
+- `geom_histogram`, `geom_boxplot`, `geom_density`   
+
+--
+- `geom_polygon`, `geom_path` :   
+  un polygon ou parcours, vertices en ordre de apparition dans `data`
+- `geom_raster`, `geom_contour` : pour données 2D
+
+--
+Mini-guide : 📖 [Data visualization cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)   
+--
+
+### Anatomie d'une géometrie :  
+
+- `geom_*(mapping = ..., data = ..., stat = ..., position = ..., ...)`
+- `mapping` spécifie les **esthétiques** (correspondances entre variables)
+- `data = ...` est utile pour lire un `data` modifié
+
+---
+
+# Esthétiques
+
+Presque toutes les géometries supportent les esthétiques :
+
+- `x`, `y`, `col` (bord), `fill` (remplissage), `alpha` (transparence).
+
+Autres esthétiques :  
+- `shape`, `lwd` (poids des lignes), `lty` (type des lignes), `size` (dimension des objets), ...
+
+--
+
+- Géometries particulières :    
+  `xmin`, `xmax`, `ymin`, `ymax` → ![:read_the_docs]
+  
+--
+
+- On peut les spécifier ailleurs :
+  `geom_*(aes(...))`, ou `ggplot2(aes(...))` (partagées parmi les `geoms`)
+
+--
+
+- Variables non in `data` : placés en dehors de `aes`
+
+
+```r
+my_size &lt;- 0.5
+ggplot(mtcars, aes(x = mpg, y = wt)) +
+* geom_point(aes(col = cyl), size = my_size)
+```
+
+
+---
+
+# Esthétiques
+
+Vous pouvez utiliser des expressions :
+
+.small-code[
+
+```r
+ggplot(mtcars) +
+    geom_point(
+      aes(x = qsec, y = mpg, 
+*         col = hp/wt,
+*         shape = factor(am)),
+      size = 5) +
+    labs(title = 'Rapport puissance/poids', x = 'Mile time [s]', y = 'Autonomie')
+```
+
+![](index_files/figure-html/unnamed-chunk-22-1.svg)&lt;!-- --&gt;
+]
+
+---
+class: twocol-code-plot
+
+# Un boxplot...
+
+Consommation vs nombre de cylindres
+
+.left-code[
+
+
+```r
+mtcars %&gt;% 
+   ggplot(aes(x = factor(cyl), y = mpg)) + 
+   geom_boxplot(aes(fill = factor(cyl))) +
+   labs(x = 'Cylindres', y = 'Autonomie')
+```
+
+`labs(...)` : titres des axes
+
+]
+.right-plot[
+
+&lt;img src="index_files/figure-html/boxplot-plot-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+]
+
+--
+
+.left-inline[
+Boxplot : médiane, quartiles, moustaches
+]
+
+--
+
+.left-inline[
+... mais qui les a calculés ?
+]
+
+---
+class: center, middle, inverse
+
+# Les statistiques
+
+---
+
+# Les statistiques
+
+Avant de plotter :
+
+- `data` est séparé en groupes selon les variables discrètes :
+    + ce qu'on trouve dans `facets`
+    + ce qu'on assigne à `col`, `fill`, `group`, ...
+
+--
+
+- Pour chaque sous-ensemble de `data`, le niveau `stat` calcule tout le nécéssaire
+
+--
+
+- Conséquence : à chaque `geom` corréspond un `stat` (souvent caché ! )
+
+--
+
+En pratique :
+
+- `stat` ajoute des **colonnes** à `data` avec des noms fixes
+
+---
+
+## Les statistiques : exemple
+
+Consommation vs poids : notez les esthétiques partagées
+
+
+```r
+p &lt;- ggplot(mtcars, aes(x = mpg, y = wt)) + 
+     geom_point()
+p
+```
+
+![](index_files/figure-html/geom-smooth-pre-1.svg)&lt;!-- --&gt;
+
+
+---
+
+## Les statistiques : exemple
+
+- Ajout du niveau `geom_smooth` : smoothing n
+  + linéaire : `method = "lm"` (et autres)
+  + non-linéaire : dans ce cas `method = "loess"` (et autres)
+--
+
+- `geom_smooth` adore `stat_smooth` :
+    + calcule les prédictions `y`, intervalles `ymin`, `ymax`, erreur `se`
+    + représentation graphique optimale
+
+
+```r
+p + geom_smooth(method = 'loess')
+```
+
+![](index_files/figure-html/geom-smooth-1.svg)&lt;!-- --&gt;
+
+---
+class: slide-class-advanced
+
+## Les statistiques : exemple
+
+- On peut accéder aux valeurs avec `stat(...)` dans le même niveau !   
+  (vieux code : les nouvelles variables commencent par `...`)
+
+--
+
+- Moyenne + intervalles de confiance pour la moyenne, `\(6\sigma\)`
+
+.small-code[
+
+```r
+p + 
+  geom_errorbar(aes(ymin = y - 3*stat(se), ymax = y + 3*stat(se), col = stat(se)), 
+                alpha = 0.2,
+                stat = 'smooth', method = 'loess') +
+  scale_color_gradient('Standard error', low = 'blue', high = 'red')
+```
+
+![](index_files/figure-html/stat-manual-1.svg)&lt;!-- --&gt;
+]
+
+
+
+---
+
+# Position
+
+
+
+Quand on a des **éléments superposés** : (p.ex. diagramme à barre)
+
+- Il y a une `stat_count` cachée ! (définit `\(y\)`)
+- Par défault, empilés (`geom_bar`) ou superposés (`geom_point`) 
+
+
+```r
+ggplot(mtcars) + 
+  geom_bar(aes(x = factor(cyl), fill = factor(am)))
+```
+
+![](index_files/figure-html/unnamed-chunk-24-1.svg)&lt;!-- --&gt;
+
+---
+
+# Position
+
+Paramètre `position` :
+
+- `dodge` : à coté
+
+
+```r
+ggplot(mtcars) + 
+  geom_bar(aes(x = factor(cyl), fill = factor(am)),
+*          position = 'dodge')
+```
+
+![](index_files/figure-html/unnamed-chunk-25-1.svg)&lt;!-- --&gt;
+
+---
+
+# Position
+
+Paramètre `position` :
+
+- `fill` : normalise
+
+
+```r
+ggplot(mtcars) + 
+  geom_bar(aes(x = factor(cyl), fill = factor(am)),
+*          position = 'fill')
+```
+
+![](index_files/figure-html/unnamed-chunk-26-1.svg)&lt;!-- --&gt;
+
+---
+
+# Position
+
+Paramètre `position` :
+
+- `stack` : empiler
+
+
+```r
+ggplot(mtcars) + 
+  geom_bar(aes(x = factor(cyl), fill = factor(am)),
+*          position = 'stack')
+```
+
+![](index_files/figure-html/unnamed-chunk-27-1.svg)&lt;!-- --&gt;
+
+
+---
+
+# Position
+
+Paramètre `position` :
+
+- `jitter` : ajout du bruit pour séparer
+
+
+```r
+ggplot(mtcars) + 
+  geom_point(aes(x = am, y = vs))
+```
+
+![](index_files/figure-html/unnamed-chunk-28-1.svg)&lt;!-- --&gt;
+
+---
+
+# Position
+
+Paramètre `position` :
+
+- `jitter` : ajout du bruit pour séparer
+
+
+```r
+ggplot(mtcars) + 
+  geom_point(aes(x = am, y = vs),
+*          position = 'jitter')
+```
+
+![](index_files/figure-html/unnamed-chunk-29-1.svg)&lt;!-- --&gt;
+
+
+---
+class: small-code
+
+# Position
+
+Paramètre `position` :
+
+- `jitter` : ajout du bruit pour séparer   
+  Réglage ou `geom_jitter()`
+
+
+```r
+ggplot(mtcars) + 
+  geom_point(aes(x = am, y = vs),
+*            position = position_jitter(width = 0.1, height = 0.1))
+```
+
+![](index_files/figure-html/unnamed-chunk-30-1.svg)&lt;!-- --&gt;
+
+
+  
+
+
+
+---
+
+# Coordinates
+
+- Cordonnées cartésiennes x-y   
+   `coord_cartesian(xlim = ..., ylim = ..., expand = ...)`
+
+--
+   
+   + `xlim`, `ylim` : contrôle du **zoom**
+
+--
+   
+   + `expand` (`TRUE`/`FALSE`) : ajout d'espace avant/après les extrèmes
+
+--
+
+- Cordonnées cartésiennes aux proportions fixés   
+   `coord_fixed(ratio = ...)`
+
+--
+
+- Cordonnées polaires   
+   `coord_polar(theta = 'x', ...)`   
+   + `theta` : qui gère l'angle   
+
+--
+
+- Cordonnées inversées   
+   `coord_flip()`   
+   x devient y
+
+
+---
+
+# Scales
+
+Correspondance entre les valeurs des **données** et les valeurs dans le **graphique.**
+
+--
+
+Echelles aux valeurs ...
+
+- continues : types `numeric`, `int`, `Date`, ...
+- discrètes : tout le reste (`factor`, `char`, ...)
+
+- Noms : `scale_` + aeshétique + type d'échelle (`continuous`, `discrete`, `manual`, ...) 
+
+--
+
+#### Anatomie d'une échelle
+
+Toutes échelles acceptent au moins :
+
+- `name` : nom dans la légende
+
+--
+
+- `breaks` : les valeurs seuil où on trouve des droites, des signes, ... (default : intelligent)
+
+--
+
+- `labels` : les chaînes de caractères associées aux `breaks` (default : intelligent)
+
+--
+
+- `trans` : transformation données → (`breaks`, `labels`) (p.ex. `'log10'`)
+
+--
+
+- `limits` : les valeurs aux extrèmes (`NA` : min/max données)     
+  Aussi : fonctions `xlim( )`, `ylim( )`
+
+
+---
+
+## Scales : x, y
+
+Exemples : 
+
+- `scale_x_continuous(trans = 'log10')` :  
+  échelle `\(x\)` logarithmique (`scale_x_log10()`)
+- `scale_y_discrete(breaks = c('a', 'b'), labels = c('Premier', 'Deuxième'))` :     
+  échelle `\(y\)` discrète
+- `scale_y_datetime()` : échelle `\(y\)` pour dates   
+  (= `scale_y_continuous(trans = 'date')`)
+
+--
+
+### Scales vs coord\_x\_\* et coord\_y\_\*
+
+&lt;div class="heavy-box center"&gt;&lt;span&gt;&lt;b&gt;scales&lt;/b&gt; les valeurs au delà des limites sont &lt;b&gt;remplacés&lt;/b&gt; avec &lt;span class="remark-inline-code"&gt;NA&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;
+
+--
+
+&lt;div class="heavy-box center" style='background: red'&gt;&lt;span&gt;⚠ coupure d'éléments graphiques ! ⚠&lt;/span&gt;&lt;/div&gt;
+
+
+---
+class: slide-class-advanced
+exclude: true
+
+&lt;!-- TODO --&gt;
+
+### Scales : expansion des limites
+
+- `expand_limits(x = ..., y = ...)` : étendent le graphique jusqu'à ce(s) point(s) là   
+  p.ex. `expand_limits(x = 0, y = 0)` pour inclure l'origine
+   
+--
+- `scale_*_*(expand = expand_scale(mult = ..., add = ...))` :   
+  pour décider combien d'espace ajouter autour des bords 
+
+---
+
+## Scales : couleurs, remplissage
+
+Fini avec les couleurs de R !   
+--
+
+- Échelles chromatiques **optimisées** et **automatiques**   
+--
+
+- Pour les esthétiques `col`, `fill`   
+
+--
+
+Continues :
+
+- `scale_color_continuous` : générique
+- `scale_color_gradient`, `scale_color_gradient2`, `scale_color_gradientn`
+- `scale_color_gray` : valeurs de gris
+
+--
+
+Discrètes :
+
+- `scale_color_brewer` : palettes de [ColorBrewer](http://colorbrewer2.org/) : http://colorbrewer2.org/
+  + 3 types : **div**erging, **qual**itative, **seq**uential
+  + liste : `RColorBrewer::display.brewer.all()`    
+&lt;img src="assets/img/brewer.png" class='center' style='width: 60%' /&gt;
+
+---
+
+- `scale_fill_viridis_d` :    
+  même principe mais avec la palette Viridis (Python : `matplotlib`)   
+  &lt;img src="assets/img/viridis.png" style='width: 65%' /&gt;
+ 
+---
+exclude: true
+
+# Scales : exemple
+
+&lt;!-- TODO --&gt;
+
+
+```r
+datasets::swiss %&gt;% 
+   rownames_to_column('Location') %&gt;% 
+   ggplot(aes(x = Catholic, y = Education)) +
+   geom_point()
+```
+
+![](index_files/figure-html/unnamed-chunk-31-1.svg)&lt;!-- --&gt;
+
+
+---
+exclude: true
+
+# Scales : exemple
+
+&lt;!-- TODO --&gt;
+
+Données sur la population US
+
+
+```r
+economics %&gt;% 
+   ggplot(aes(x = date)) + 
+   geom_line(aes(y = pop)) + 
+   expand_limits(y = 0)
+
+storms %&gt;% 
+   mutate(time = paste(year, month, day, hour, sep = '-'),
+          time = lubridate::parse_date_time(order = 'ymdH')) %&gt;% 
+   ggplot() +
+   geom_
+```
+
+
+
+---
+
+# Facets
+
+Deux façons :
+
+- `facet_wrap(...)` : aligner sur une dimension
+- `facet_grid(...)` : aligner en deux dimensions
+
+--
+
+Les axes seront partagés entre les graphiques !   
+(sauf avec p.ex. `scales = "free_x"`)
+
+--
+
+Paramètres :
+
+- `...` :   
+  + une formule du type `colonnes ~ lignes` (vieille interface)
+  + `vars(colonnes), vars(lignes)` (nouvelle interface)
+
+--
+class: slide-class-advanced
+
+- `labeller` : types d'étiquettes pour les variables dans les onglets   
+  `labeller = label_value` : que la valeur   
+  `labeller = label_both` : '`nom` : `valeur`'   
+  `labeller = label_parsed` : si `valeur` est une expression (`plotmath`)
+  
+
+---
+
+# Facets : exemple
+
+Sans onglets :
+
+
+```r
+mtcars %&gt;% 
+  ggplot(aes(x = mpg, y = wt, col = factor(cyl))) + 
+  geom_point()
+```
+
+![](index_files/figure-html/unnamed-chunk-33-1.svg)&lt;!-- --&gt;
+
+
+---
+
+# Facets : exemple
+
+`facet_wrap` : par transmission (automatique / manuelle)
+
+
+```r
+mtcars %&gt;% 
+  ggplot(aes(x = mpg, y = wt, col = factor(cyl))) + 
+  geom_point() +
+* facet_wrap(~ am) # vars(am)
+```
+
+![](index_files/figure-html/unnamed-chunk-34-1.svg)&lt;!-- --&gt;
+
+---
+
+# Facets : exemple
+
+`facet_wrap` avec deux variables (nombre vitesses, transmission)
+
+
+```r
+mtcars %&gt;% 
+  ggplot(aes(x = mpg, y = wt, col = factor(cyl))) + 
+  geom_point() +
+* facet_wrap(gear ~ am) # ou vars(gear, am)
+```
+
+![](index_files/figure-html/unnamed-chunk-35-1.svg)&lt;!-- --&gt;
+
+
+---
+
+# Facets : exemple
+
+`facet_grid` : mieux !
+
+
+```r
+mtcars %&gt;% 
+  ggplot(aes(x = mpg, y = wt, col = factor(cyl))) + 
+  geom_point() +
+* facet_grid(gear ~ am)
+```
+
+![](index_files/figure-html/unnamed-chunk-36-1.svg)&lt;!-- --&gt;
+
+
+---
+
+# Facets : exemple
+
+`facet_grid` : mieux, avec étiquettes
+
+
+```r
+mtcars %&gt;% 
+  ggplot(aes(x = mpg, y = wt, col = factor(cyl))) + 
+  geom_point() +
+* facet_grid(gear ~ am, labeller = label_both)
+```
+
+![](index_files/figure-html/unnamed-chunk-37-1.svg)&lt;!-- --&gt;
+
+
+
+---
+class: slide-class-advanced
+
+# Facets : exemple
+
+`facet_grid` : découplage des axes (mais toujours partagés ! )
+
+
+```r
+mtcars %&gt;% 
+  ggplot(aes(x = mpg, y = wt, col = factor(cyl))) + 
+  geom_point() +
+* facet_grid(gear ~ am, labeller = label_both, scales = 'free')
+```
+
+![](index_files/figure-html/unnamed-chunk-38-1.svg)&lt;!-- --&gt;
+
+
+---
+
+# Facets : exemple
+
+Rien vous empêche d'utiliser des expressions !
+
+
+```r
+mtcars %&gt;% 
+  ggplot(aes(x = mpg, y = wt, col = factor(cyl))) + 
+  geom_point() +
+  facet_grid(paste(gear, 'vitesses') ~ 
+             paste('Transmission', 
+*                  ifelse(am == 0, 'automatique', 'manuelle')))
+```
+
+![](index_files/figure-html/unnamed-chunk-39-1.svg)&lt;!-- --&gt;
+
+--
+
+.protip-popup[
+&lt;h4&gt;Protip&lt;/h4&gt;
+
+- mieux transformer les variables *avant* de plotter (`dplyr` : `mutate`)
+]
+
+&lt;!--TODO: plotmath --&gt;
+
+
+
+
+---
+
+# Thèmes
+
+Avec `theme(element = valeur, ...)` vous pouvez modifier les éléments graphiques   
+(→ ![:read_the_docs])
+
+--
+
+.pull-left[.text-small[
+  ### `element`
+
+  - `title` : tous les titres
+  - `axis.title.*` : les titre des axes
+  
+  - `axis.text.*` :   
+    textes dans les marques sur les axes
+  - `axis.ticks.*` :   
+    marques sur les axes
+  - `axis.line.*` :   
+    les droites des axes
+
+  - `legend.*` :   
+    les légendes
+  - `panel.*` : fond du graphique   
+  - `plot.*` : autour le graphique
+  - `strip.*` : composants de `facets`
+  
+  - ... ![:read_the_docs]
+]
+]
+
+--
+
+.pull-right[
+
+  ### `valeur`
+
+   Tous les éléments sont du type :
+
+  - `element_line(...)` : droits
+  
+  - `element_rect(...)` :   
+    rectangles (bords, fonds)
+  
+  - `element_text(...)` : texte
+  
+  - `element_blank(...)` :   
+    pour effacer
+
+]
+
+---
+
+# Thèmes : un exemple 
+
+Base
+
+
+```r
+p &lt;- ggplot(mtcars, aes(x = mpg, y = wt, col = factor(cyl))) + 
+   geom_point() + 
+   ggtitle('Autonomie vs poids') + 
+   scale_color_discrete('Cylindres') +
+   labs(x = 'Autonomie', y = 'Poids') +
+   facet_grid(am ~ gear, labeller = label_both)
+*p 
+```
+
+![](index_files/figure-html/theme-slide-prog-1-1.svg)&lt;!-- --&gt;
+
+
+---
+
+# Thèmes : un exemple 
+
+Titre gras
+
+
+```r
+p + theme(
+* plot.title = element_text(face = 'bold'))
+```
+
+![](index_files/figure-html/theme-slide-prog-2-1.svg)&lt;!-- --&gt;
+
+---
+
+# Thèmes : un exemple 
+
+Sans le fond
+
+
+```r
+p + theme(
+  plot.title = element_text(face = 'bold'),
+* panel.background = element_blank())
+```
+
+![](index_files/figure-html/theme-slide-prog-3-1.svg)&lt;!-- --&gt;
+
+---
+
+# Thèmes : un exemple 
+
+Avec axes 
+
+
+```r
+p + theme(
+  plot.title = element_text(face = 'bold'),
+  panel.background = element_blank(),
+* axis.line = element_line(size = 1))
+```
+
+![](index_files/figure-html/theme-slide-prog-4-1.svg)&lt;!-- --&gt;
+
+---
+
+# Thèmes : un exemple 
+
+Fond des onglets
+
+
+```r
+p + theme(
+  plot.title = element_text(face = 'bold'),
+  panel.background = element_blank(),
+  axis.line = element_line(size = 1),
+* strip.background = element_rect(fill = 'black'))
+```
+
+![](index_files/figure-html/theme-slide-prog-5-1.svg)&lt;!-- --&gt;
+
+---
+
+# Thèmes : un exemple 
+
+Texte des onglets
+
+
+```r
+p + theme(
+  plot.title = element_text(face = 'bold'),
+  panel.background = element_blank(),
+  axis.line = element_line(size = 1),
+  strip.background = element_rect(fill = 'black'),
+* strip.text = element_text(color = 'white', face = 'bold'))
+```
+
+![](index_files/figure-html/theme-slide-prog-6-1.svg)&lt;!-- --&gt;
+
+
+---
+
+# Thèmes : un exemple 
+
+Etiquettes axe x  
+
+
+```r
+p + theme(
+  plot.title = element_text(face = 'bold'),
+  panel.background = element_blank(),
+  axis.line = element_line(size = 1),
+  strip.background = element_rect(fill = 'black'),
+  strip.text = element_text(color = 'white', face = 'bold'),
+* axis.text.x = element_text(angle = 90))
+```
+
+![](index_files/figure-html/theme-slide-prog-7-1.svg)&lt;!-- --&gt;
+
+--
+
+# Thèmes : exemples
+
+Inclus : 
+
+- `theme_bw()` : noir et blanc
+
+![](index_files/figure-html/unnamed-chunk-40-1.svg)&lt;!-- --&gt;
+
+---
+
+# Thèmes : exemples 
+
+Inclus : 
+
+- `theme_minimal()` : minimaliste
+
+![](index_files/figure-html/unnamed-chunk-41-1.svg)&lt;!-- --&gt;
+
+
+---
+
+# Thèmes : exemples 
+
+Inclus : 
+
+- `theme_gray()` : gris
+
+![](index_files/figure-html/unnamed-chunk-42-1.svg)&lt;!-- --&gt;
+
+---
+
+# Thèmes : exemples 
+
+Package 📦 `ggthemes` :
+
+- `theme_fivethirtyeight()`
+
+![](index_files/figure-html/unnamed-chunk-43-1.svg)&lt;!-- --&gt;
+
+---
+
+# Thèmes : exemples 
+
+Package 📦 `ggthemes` :
+
+- `theme_few()`
+
+![](index_files/figure-html/unnamed-chunk-44-1.svg)&lt;!-- --&gt;
+
+---
+
+# Thèmes : exemples 
+
+Package 📦 `ggthemes` :
+
+- `theme_excel()`
+
+![](index_files/figure-html/unnamed-chunk-45-1.svg)&lt;!-- --&gt;
+
+--
+
+&lt;img src="https://media0.giphy.com/media/njl60xjwgrkWY/giphy.gif?cid=3640f6095c981f27764b434a323926c1" width="60%" class='image-popup-center'/&gt;
+
+
+---
+class: twocol-code-plot
+
+#  Thèmes : composition
+
+.left-code[
+### Construction
+
+Les thèmes sont composables :
+
+```r
+my_theme &lt;- theme_bw() + 
+   theme(plot.title = element_text(colour = 'red'))
+
+p + my_theme
+```
+
+### Réglage globale
+
+Pour changer toutes les graphiques :
+
+
+```r
+ggplot2::theme_set(my_theme)
+```
+]
+
+--
+
+.right-plot[
+
+&lt;img src="index_files/figure-html/theme-plus-plot-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+
+
+---
+
+# Sauvegarde
+
+Facile : fonction `ggsave`   
+Dernier plot (ou paramètre `plot = ...`)
+
+
+```r
+ggsave('myfile.pdf', width = 8, height = 5, units = 'cm')
+ggsave('myfile.eps', width = 8, height = 5, units = 'cm')
+ggsave('myfile.png', width = 8, height = 5, units = 'cm', dpi = 300)
+```
+
+--
+class: slide-class-advanced
+
+Cairo PDF (en cas de polices de caractères personnalisées) :
+
+
+```r
+ggsave('myfile.pdf', device = cairo_pdf)
+```
+
+---
+class: slide-class-advanced small-code
+
+# Composition d'éléments
+
+Pour éviter de répéter des éléments chaque fois :   
+- objet `ggplot` + objet `list`
+
+
+```r
+my_opts &lt;- list(
+  scale_x_log10(), 
+  scale_color_discrete('Cylindres'),
+  ggtitle('Mon titre', subtitle = 'Sous-titre')
+)
+```
+
+--
+
+
+```r
+ggplot(mtcars, aes(x = mpg, y = wt, col = factor(cyl))) + 
+         geom_point() +
+*        my_opts
+```
+
+![](index_files/figure-html/comb-plot-1.svg)&lt;!-- --&gt;
+
+
+
+---
+class: center, middle, inverse
+
+# Extensions
+
+
+---
+class: slide-class-advanced
+
+# plotly
+
+- Package ![:package_cran plotly] : librarie similaire à `ggplot2`, mais interactive !
+
+--
+
+- traducteur de `ggplot2` à `plotly` : fonction `ggplotly`
+
+--
+
+
+```r
+library(plotly)
+
+pl &lt;- ggplot(mtcars, aes(x = mpg, y = wt)) + geom_point()
+
+*ggplotly(pl)
+```
+
+
+&lt;iframe src="widgets/plotly_figure.html" width="600" height="300" scrolling="no" seamless="seamless" frameBorder="0"&gt;&lt;/iframe&gt;
+
+
+
+---
+# Animations
+
+Package ![:package_cran gganimate]
+
+Vous ajoutez quelques lignes...
+
+
+```r
+library(ggplot2)
+library(gganimate)
+
+p &lt;- ggplot(mtcars, aes(factor(cyl), mpg)) + 
+  geom_boxplot() + 
+* transition_states(
+*   gear, transition_length = 2, state_length = 1
+* ) +
+* enter_fade() +
+* exit_shrink() +
+* ease_aes('sine-in-out')
+```
+
+
+---
+
+# Animations
+
+
+
+![](assets/img/gganimate.gif)
+
+
+---
+class: small-code
+
+# Cartographie
+
+Approche à la `tidyverse` : package ![:package_cran sf]
+
+--
+
+```r
+library(sf)
+
+# Shapefile des cantons
+shp &lt;- sf::st_read('data/switzerland_shapefiles/gadm36_CHE_1.shp', quiet = TRUE)
+
+ggplot(shp) +
+   geom_sf(aes(fill = (NAME_1 == 'Ticino'))) +
+   geom_sf_text(aes(label = NAME_1), size = 3) +
+   theme_bw() +
+   scale_fill_discrete('', breaks = c(TRUE, FALSE), labels = c('Rigole', 'Travaille'))
+```
+
+![](index_files/figure-html/sf-1.svg)&lt;!-- --&gt;
+
+
+
+---
+class: small-code slide-class-advanced
+exclude: true
+
+# Graphs
+
+- Package ![:package_cran tidygraph]
+- Package ![:package_cran ggraph]
+
+- grammaire des **graphs**
+
+&lt;!-- TODO --&gt;
+
+---
+class: slide-class-advanced
+
+# ggplot2 in Python
+
+Diverses implémentations de la grammaire des graphiques :
+- [`plotnine`](https://plotnine.readthedocs.io/)
+- [`ggplot`](http://ggplot.yhathq.com/)
+
+
+```python
+from ggplot import *
+
+ggplot(aes(x='date', y='beef'), data=meat) +\
+    geom_line() +\
+    stat_smooth(colour='blue', span=0.2)
+```
+
+.img-small-50[
+  ![](assets/img/ggplot_py.png)
+]
+
+---
+class: center, middle, inverse
+
+# Pour aller plus loin...
+
+---
+
+# Pour aller plus loin...
+
+Galérie des extensions
+
+- [ggplot gallery](https://www.ggplot2-exts.org/gallery/) : https://www.ggplot2-exts.org/gallery/
+
+Protip : 
+
+1. suivez des blog 
+2. copiez les exemples de GitHub
+3. ???
+4. profitez !
+
+
+---
+class: slide-class-advanced
+
+# Ces slides...
+
+## R Markdown
+
+- **Markdown** : langage simple pour rédiger du texte formaté
+- GitHub, blogs...
+
+--
+
+- **R Markdown** = Markdown avec code integré
+- pour générer 
+  + pages web, blogs, articles, présentations, interfaces, livres, ... 
+- [Galérie](https://rmarkdown.rstudio.com/gallery.html)
+- [Guide](https://bookdown.org/yihui/rmarkdown/) (faite avec R Markdown + ![:package_cran blogdown])
+
+### Cette présentation 
+
+- ![:package_cran xaringan] basé sur la librairie [reveal.js](https://revealjs.com)
+- Mélange : R Markdown + CSS (quelques détails)
+- [Documentation](http://slides.yihui.name/xaringan/) (c'est une présentation!)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="assets/js/macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

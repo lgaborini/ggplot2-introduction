@@ -1,0 +1,236 @@
+
+---
+class: inverse, middle, center
+
+# R : les bases
+
+---
+
+# R moderne : le tidyverse
+
+-  ![:package_cran tidyverse] : écosystème de packages qui travaillent bien ensemble
+
+![](assets/img/tidyverse1.png) et autres...
+
+--
+
+- Installation et chargement :   
+  `install.packages("tidyverse")`   
+  `library(tidyverse)`
+
+<!-- 
+- `apply`, `sapply`, `vapply`, ... : remplacés par `purrr::map`     
+    `df[df$col == 'a', ]` <span class='text-curse'>(combien de `[` ??? )</span> : remplacé par `df %>% filter(col == 'a')`
+ -->
+
+---
+
+# R moderne : le tidyverse
+
+Les plus importants :
+
+-  ![:package_cran readr] : lecture des données de fichiers (conversion en `data.frames`)
+
+--
+
+- ![:package_cran tidyr] : rangément de `data.frames`
+
+--
+
+- ![:package_cran dplyr] : manipulation de `data.frames` :   
+   + filtrage, transformations, regroupage (voir : `plyr`, mais mieux !)
+
+--
+
+- ![:package_cran ggplot2] : visualisation de données
+
+--
+
+Auteur principal : Hadley Wickham (https://github.com/hadley/)
+
+
+---
+
+## Caractéristiques communes
+
+- Le premier paramètre de chaque fonction est un `data.frame` qui contient l'information
+
+--
+
+- la valeur de retour est toujours un `data.frame` (ou `tibble`)
+
+--
+
+- fonctions faciles et prévisibles :   
+  p.ex., `read_csv`, `mutate`, `select`, `summarize`, `filter`, `geom_point`, `geom_line`
+
+--
+    
+- comportement prévisible : paramètres et valeurs de retour, erreurs, ...
+
+--
+
+- le **flux d'informations** est indiqué avec l'operateur `%>%` (**pipe**)
+
+--
+
+<div class="heavy-box">
+    <pre class="code-normal code-inline">f(x,y)</pre> une fonction <br/>
+    <pre class="code-normal code-inline">x %>% f(y)</pre> est equivalent à : <pre class="code-normal code-inline">f(x,y)</pre>
+</div>
+
+- très bonne documentation : R help, sites Internet, blogs, github
+
+--
+
+<div class="heavy-box">
+<p><b>données rectangulaires</b> (<strong>tidy data</strong>)</p>
+<p>chaque ligne est une observation, chaque colonne est une variable</p>
+</div>
+
+---
+
+# R moderne : exemple
+
+Données sur les vols de New York en 2013 : ![:package_cran nycflights13]
+
+--
+
+```{r}
+library(nycflights13)
+head(flights, 4)
+```
+
+---
+
+# R moderne : exemple
+
+Devinez le résultat !
+
+```{r}
+df <- flights %>% 
+   filter(month %in% c(12, 1, 2)) %>% 
+   group_by(dest) %>% 
+   summarise(
+      count = n(),
+      dist = mean(distance, na.rm = TRUE),
+      delay = mean(arr_delay, na.rm = TRUE)
+   ) %>% 
+   filter(count > 20, dest != "HNL")
+```
+
+(on a utilisé `dplyr` : fonctions `filter`, `group_by`, `summarise`, `n` et `%>%`)
+
+---
+
+# R moderne : exemple
+
+Voilà :
+
+```{r}
+head(df, 10)
+```
+
+---
+
+# R moderne : exemple
+
+`nycflights13` contient aussi des informations sur les aéroports :
+
+```{r}
+head(airports, 5)
+```
+
+---
+
+# R moderne : exemple
+
+Jointures avec `dplyr` :
+
+```{r, echo=c(1,2)}
+df_airports <- df %>% 
+   left_join(airports, by = c('dest' = 'faa'))
+
+head(df_airports, 7)
+```
+
+---
+
+# R moderne : exemple
+
+Visualisation avec `ggplot2` :
+
+```{r us-plot-make}
+
+library(sf)
+library(maps)
+
+# Read the USA map
+us_states <- sf::st_as_sf(
+   maps::map("state", plot = FALSE, fill = TRUE)
+)
+
+p <- df_airports %>% 
+   ggplot() +
+   geom_sf(data = us_states) +
+   geom_point(aes(x = lon, y = lat, size = delay)) +
+   ggtitle('Winter average delays from NYC') +
+   labs(x = '', y = '') +
+   scale_size_continuous('Delay [min]')
+   
+```
+
+
+---
+class: middle
+
+# R moderne : exemple
+
+```{r us-plot-show, echo = FALSE, out.extra='style="max-width: 100%"'}
+p
+```
+
+
+
+
+---
+class: center, middle, inverse
+
+# La grammaire des données
+
+---
+
+# R : dplyr
+
+**Grammaire des données**
+
+- Juste quelques notions !
+
+--
+
+- Les données sont des `data.frame` (`tibble`)
+
+--
+
+- **verbes** qui les transforment
+
+--
+
+   + filtrage par lignes : `filter`
+   + filtrage par colonnes : `select`
+   + ajout de colonnes : `mutate`, `rename`
+   + groupage de lignes : `group_by`
+   + rangement : `arrange`
+   + résumé : `summarise`
+
+- Connexions avec les bases des données plus commmunes (p.ex. sqlite)
+
+--
+
+- Paradigme **split-apply-combine**
+
+--
+
+   + données → "je regroupe → je transforme → je simplifie"
+
+<!-- TODO: spread/gather, quite important! -->

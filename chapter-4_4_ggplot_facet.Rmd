@@ -1,0 +1,155 @@
+
+---
+
+# Facets
+
+Deux façons :
+
+- `facet_wrap(...)` : aligner sur une dimension
+- `facet_grid(...)` : aligner en deux dimensions
+
+--
+
+Les axes seront partagés entre les graphiques !   
+(sauf avec p.ex. `scales = "free_x"`)
+
+--
+
+Paramètres :
+
+- `...` :   
+  + une formule du type `colonnes ~ lignes` (vieille interface)
+  + `vars(colonnes), vars(lignes)` (nouvelle interface)
+
+--
+class: slide-class-advanced
+
+- `labeller` : types d'étiquettes pour les variables dans les onglets   
+  `labeller = label_value` : que la valeur   
+  `labeller = label_both` : '`nom` : `valeur`'   
+  `labeller = label_parsed` : si `valeur` est une expression (`plotmath`)
+  
+
+---
+
+# Facets : exemple
+
+Sans onglets :
+
+```{r, fig.height=4}
+
+mtcars %>% 
+  ggplot(aes(x = mpg, y = wt, col = factor(cyl))) + 
+  geom_point()
+
+```
+
+
+---
+
+# Facets : exemple
+
+`facet_wrap` : par transmission (automatique / manuelle)
+
+```{r, fig.height=4}
+
+mtcars %>% 
+  ggplot(aes(x = mpg, y = wt, col = factor(cyl))) + 
+  geom_point() +
+  facet_wrap(~ am) # vars(am)   #<<
+
+```
+
+---
+
+# Facets : exemple
+
+`facet_wrap` avec deux variables (nombre vitesses, transmission)
+
+```{r, fig.height=4}
+
+mtcars %>% 
+  ggplot(aes(x = mpg, y = wt, col = factor(cyl))) + 
+  geom_point() +
+  facet_wrap(gear ~ am) # ou vars(gear, am) #<<
+
+```
+
+
+---
+
+# Facets : exemple
+
+`facet_grid` : mieux !
+
+```{r, fig.height=4}
+
+mtcars %>% 
+  ggplot(aes(x = mpg, y = wt, col = factor(cyl))) + 
+  geom_point() +
+  facet_grid(gear ~ am) #<<
+
+```
+
+
+---
+
+# Facets : exemple
+
+`facet_grid` : mieux, avec étiquettes
+
+```{r, fig.height=4}
+
+mtcars %>% 
+  ggplot(aes(x = mpg, y = wt, col = factor(cyl))) + 
+  geom_point() +
+  facet_grid(gear ~ am, labeller = label_both) #<<
+
+```
+
+
+
+---
+class: slide-class-advanced
+
+# Facets : exemple
+
+`facet_grid` : découplage des axes (mais toujours partagés ! )
+
+```{r, fig.height=4}
+
+mtcars %>% 
+  ggplot(aes(x = mpg, y = wt, col = factor(cyl))) + 
+  geom_point() +
+  facet_grid(gear ~ am, labeller = label_both, scales = 'free') #<<
+
+```
+
+
+---
+
+# Facets : exemple
+
+Rien vous empêche d'utiliser des expressions !
+
+```{r, fig.height=4}
+
+mtcars %>% 
+  ggplot(aes(x = mpg, y = wt, col = factor(cyl))) + 
+  geom_point() +
+  facet_grid(paste(gear, 'vitesses') ~ 
+             paste('Transmission', 
+                   ifelse(am == 0, 'automatique', 'manuelle'))) #<<
+
+```
+
+--
+
+.protip-popup[
+<h4>Protip</h4>
+
+- mieux transformer les variables *avant* de plotter (`dplyr` : `mutate`)
+]
+
+<!--TODO: plotmath -->
+

@@ -1,0 +1,5 @@
+
+---
+layout: true
+
+<div class="ribbon-advanced"><span>Advanced!</span></div>

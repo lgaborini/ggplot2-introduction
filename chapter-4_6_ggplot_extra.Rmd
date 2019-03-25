@@ -1,0 +1,46 @@
+
+---
+
+# Sauvegarde
+
+Facile : fonction `ggsave`   
+Dernier plot (ou paramètre `plot = ...`)
+
+```{r save, eval=FALSE}
+ggsave('myfile.pdf', width = 8, height = 5, units = 'cm')
+ggsave('myfile.eps', width = 8, height = 5, units = 'cm')
+ggsave('myfile.png', width = 8, height = 5, units = 'cm', dpi = 300)
+```
+
+--
+class: slide-class-advanced
+
+Cairo PDF (en cas de polices de caractères personnalisées) :
+
+```{r, eval=FALSE}
+ggsave('myfile.pdf', device = cairo_pdf)
+```
+
+---
+class: slide-class-advanced small-code
+
+# Composition d'éléments
+
+Pour éviter de répéter des éléments chaque fois :   
+- objet `ggplot` + objet `list`
+
+```{r comb-list}
+my_opts <- list(
+  scale_x_log10(), 
+  scale_color_discrete('Cylindres'),
+  ggtitle('Mon titre', subtitle = 'Sous-titre')
+)
+```
+
+--
+
+```{r comb-plot, fig.height=3}
+ggplot(mtcars, aes(x = mpg, y = wt, col = factor(cyl))) + 
+         geom_point() +
+         my_opts   #<<
+```
