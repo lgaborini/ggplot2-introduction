@@ -24,10 +24,12 @@ Les plus importantes :
 --
 - `geom_polygon`, `geom_path` :   
   un polygone ou parcours, vertex en ordre de apparition dans `data`
-- `geom_raster`, `geom_contour` : pour données 2D
+- `geom_raster`, `geom_contour` : pour données 2D   
 
 --
+
 Mini-guide : 📖 [Data visualization cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)   
+
 --
 
 ### Anatomie d'une géometrie :  
@@ -50,11 +52,11 @@ Autres esthétiques :
 --
 
 - Géométries particulières :    
-  `xmin`, `xmax`, `ymin`, `ymax` → ![:read_the_docs]
+  `xmin`, `xmax`, `ymin`, `ymax`, `group`, ... → ![:read_the_docs]
   
 --
 
-- On peut les spécifier ailleurs :
+- On peut les spécifier ailleurs :   
   `geom_*(aes(...))`, ou `ggplot2(aes(...))` (partagées parmi les `geoms`)
 
 --

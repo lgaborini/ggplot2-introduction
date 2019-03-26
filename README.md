@@ -5,7 +5,8 @@ It is a throrough introduction to ggplot2, with some advanced concepts.
 
 ⚠ Written in French! ⚠
 
-[Browse the slides](https://lgaborini.github.io/ggplot2-introduction/)!
+[Browse the slides](https://lgaborini.github.io/ggplot2-introduction/)!    
+[Download the slides](docs/index.pdf)! (not always updated)
 
 ## Prerequisites
 
@@ -21,6 +22,8 @@ To build the presentation, one needs the 📦 [`tidyverse`](https://cran.r-proje
 - 📦 [`gganimate`](https://cran.r-project.org/package=gganimate)
 - 📦 [`ggraph`](https://cran.r-project.org/package=ggraph)
 - 📦 [`tidygraph`](https://cran.r-project.org/package=tidygraph)
+
+To build the slides, one needs the package 📦 [`pagedown`](https://cran.r-project.org/package=pagedown) and Chrome installed.
 
 ## Technology
 

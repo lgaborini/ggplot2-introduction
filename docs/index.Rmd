@@ -42,30 +42,30 @@ knitr::opts_template$set(
 ```{r, child='chapter-1_intro.Rmd', eval=TRUE}
 ```
 
-```{r, child='chapter-2_tidyverse.Rmd', eval=FALSE}
+```{r, child='chapter-2_tidyverse.Rmd', eval=TRUE}
 ```
 
-```{r, child='chapter-3_graphiques.Rmd', eval=FALSE}
+```{r, child='chapter-3_graphiques.Rmd', eval=TRUE}
 ```
 
-```{r, child='chapter-4_1_ggplot_intro.Rmd', eval=FALSE}
+```{r, child='chapter-4_1_ggplot_intro.Rmd', eval=TRUE}
 ```
 
-```{r, child='chapter-4_2_ggplot_geom_stat.Rmd', eval=FALSE}
+```{r, child='chapter-4_2_ggplot_geom_stat.Rmd', eval=TRUE}
 ```
 
-```{r, child='chapter-4_3_ggplot_coord_scales.Rmd', eval=FALSE}
+```{r, child='chapter-4_3_ggplot_coord_scales.Rmd', eval=TRUE}
 ```
 
-```{r, child='chapter-4_4_ggplot_facet.Rmd', eval=FALSE}
+```{r, child='chapter-4_4_ggplot_facet.Rmd', eval=TRUE}
 ```
 
-```{r, child='chapter-4_5_ggplot_themes.Rmd', eval=FALSE}
+```{r, child='chapter-4_5_ggplot_themes.Rmd', eval=TRUE}
 ```
 
-```{r, child='chapter-4_6_ggplot_extra.Rmd', eval=FALSE}
+```{r, child='chapter-4_6_ggplot_extra.Rmd', eval=TRUE}
 ```
 
-```{r, child='chapter-5_ggplot_extensions.Rmd', eval=FALSE}
+```{r, child='chapter-5_ggplot_extensions.Rmd', eval=TRUE}
 ```
 
