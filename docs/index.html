@@ -7,6 +7,15 @@
     <meta name="date" content="2019-03-26" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/jquery/jquery.min.js"></script>
+    <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding/datatables.js"></script>
+    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
     <link rel="stylesheet" href="assets\css\ribbon-advanced.css" type="text/css" />
     <link rel="stylesheet" href="assets\css\custom.css" type="text/css" />
   </head>
@@ -194,22 +203,11 @@ Données sur les vols de New York en 2013 : ![:package_cran nycflights13]
 
 ```r
 library(nycflights13)
-head(flights, 4)
+head(flights, 20)
 ```
 
-```
-## # A tibble: 4 x 19
-##    year month   day dep_time sched_dep_time dep_delay arr_time
-##   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
-## 1  2013     1     1      517            515         2      830
-## 2  2013     1     1      533            529         4      850
-## 3  2013     1     1      542            540         2      923
-## 4  2013     1     1      544            545        -1     1004
-## # ... with 12 more variables: sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;,
-## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
-## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;,
-## #   time_hour &lt;dttm&gt;
-```
+<div id="DT-flights" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="DT-flights">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],[2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[517,533,542,544,554,554,555,557,557,558,558,558,558,558,559,559,559,600,600,601],[515,529,540,545,600,558,600,600,600,600,600,600,600,600,600,559,600,600,600,600],[2,4,2,-1,-6,-4,-5,-3,-3,-2,-2,-2,-2,-2,-1,0,-1,0,0,1],[830,850,923,1004,812,740,913,709,838,753,849,853,924,923,941,702,854,851,837,844],[819,830,850,1022,837,728,854,723,846,745,851,856,917,937,910,706,902,858,825,850],[11,20,33,-18,-25,12,19,-14,-8,8,-2,-3,7,-14,31,-4,-8,-7,12,-6],["UA","UA","AA","B6","DL","UA","B6","EV","B6","AA","B6","B6","UA","UA","AA","B6","UA","B6","MQ","B6"],[1545,1714,1141,725,461,1696,507,5708,79,301,49,71,194,1124,707,1806,1187,371,4650,343],["N14228","N24211","N619AA","N804JB","N668DN","N39463","N516JB","N829AS","N593JB","N3ALAA","N793JB","N657JB","N29129","N53441","N3DUAA","N708JB","N76515","N595JB","N542MQ","N644JB"],["EWR","LGA","JFK","JFK","LGA","EWR","EWR","LGA","JFK","LGA","JFK","JFK","JFK","EWR","LGA","JFK","EWR","LGA","LGA","EWR"],["IAH","IAH","MIA","BQN","ATL","ORD","FLL","IAD","MCO","ORD","PBI","TPA","LAX","SFO","DFW","BOS","LAS","FLL","ATL","PBI"],[227,227,160,183,116,150,158,53,140,138,149,158,345,361,257,44,337,152,134,147],[1400,1416,1089,1576,762,719,1065,229,944,733,1028,1005,2475,2565,1389,187,2227,1076,762,1023],[5,5,5,5,6,5,6,6,6,6,6,6,6,6,6,5,6,6,6,6],[15,29,40,45,0,58,0,0,0,0,0,0,0,0,0,59,0,0,0,0],["2013-01-01T10:00:00Z","2013-01-01T10:00:00Z","2013-01-01T10:00:00Z","2013-01-01T10:00:00Z","2013-01-01T11:00:00Z","2013-01-01T10:00:00Z","2013-01-01T11:00:00Z","2013-01-01T11:00:00Z","2013-01-01T11:00:00Z","2013-01-01T11:00:00Z","2013-01-01T11:00:00Z","2013-01-01T11:00:00Z","2013-01-01T11:00:00Z","2013-01-01T11:00:00Z","2013-01-01T11:00:00Z","2013-01-01T10:00:00Z","2013-01-01T11:00:00Z","2013-01-01T11:00:00Z","2013-01-01T11:00:00Z","2013-01-01T11:00:00Z"]],"container":"<table class=\"compact\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>year<\/th>\n      <th>month<\/th>\n      <th>day<\/th>\n      <th>dep_time<\/th>\n      <th>sched_dep_time<\/th>\n      <th>dep_delay<\/th>\n      <th>arr_time<\/th>\n      <th>sched_arr_time<\/th>\n      <th>arr_delay<\/th>\n      <th>carrier<\/th>\n      <th>flight<\/th>\n      <th>tailnum<\/th>\n      <th>origin<\/th>\n      <th>dest<\/th>\n      <th>air_time<\/th>\n      <th>distance<\/th>\n      <th>hour<\/th>\n      <th>minute<\/th>\n      <th>time_hour<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":7,"lengthChange":false,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,11,15,16,17,18]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 ---
 
@@ -459,7 +457,7 @@ legend('topright',
 --
 
 .right-plot[
-&lt;img src="index_files/figure-html/unnamed-chunk-17-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-18-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -484,7 +482,7 @@ for (cyl_sub in unique(mtcars$cyl)) {
 ]
 .right-plot[
 
-&lt;img src="index_files/figure-html/unnamed-chunk-18-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-19-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
 ]
 ---
 
@@ -600,7 +598,7 @@ ggplot(mtcars) +
 
 .right-plot[
 
-&lt;img src="index_files/figure-html/unnamed-chunk-19-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-20-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -630,7 +628,7 @@ p
 --
 .right-plot[
 
-&lt;img src="index_files/figure-html/unnamed-chunk-20-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-21-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
 ]
 ---
 class: twocol-code-plot
@@ -656,7 +654,7 @@ ggplot(mtcars) +
 ]
 --
 .right-plot[
-&lt;img src="index_files/figure-html/unnamed-chunk-21-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-22-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
 ]
 
 
@@ -749,7 +747,7 @@ ggplot(mtcars) +
     labs(title = 'Rapport puissance/poids', x = 'Mile time [s]', y = 'Autonomie')
 ```
 
-![](index_files/figure-html/unnamed-chunk-22-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-23-1.svg)&lt;!-- --&gt;
 ]
 
 ---
@@ -898,7 +896,7 @@ ggplot(mtcars) +
   geom_bar(aes(x = factor(cyl), fill = factor(am)))
 ```
 
-![](index_files/figure-html/unnamed-chunk-24-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-25-1.svg)&lt;!-- --&gt;
 
 ---
 
@@ -915,7 +913,7 @@ ggplot(mtcars) +
 *          position = 'dodge')
 ```
 
-![](index_files/figure-html/unnamed-chunk-25-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-26-1.svg)&lt;!-- --&gt;
 
 ---
 
@@ -932,7 +930,7 @@ ggplot(mtcars) +
 *          position = 'fill')
 ```
 
-![](index_files/figure-html/unnamed-chunk-26-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-27-1.svg)&lt;!-- --&gt;
 
 ---
 
@@ -949,7 +947,7 @@ ggplot(mtcars) +
 *          position = 'stack')
 ```
 
-![](index_files/figure-html/unnamed-chunk-27-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-28-1.svg)&lt;!-- --&gt;
 
 
 ---
@@ -966,7 +964,7 @@ ggplot(mtcars) +
   geom_point(aes(x = am, y = vs))
 ```
 
-![](index_files/figure-html/unnamed-chunk-28-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-29-1.svg)&lt;!-- --&gt;
 
 ---
 
@@ -983,7 +981,7 @@ ggplot(mtcars) +
 *          position = 'jitter')
 ```
 
-![](index_files/figure-html/unnamed-chunk-29-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-30-1.svg)&lt;!-- --&gt;
 
 
 ---
@@ -1003,7 +1001,7 @@ ggplot(mtcars) +
 *            position = position_jitter(width = 0.1, height = 0.1))
 ```
 
-![](index_files/figure-html/unnamed-chunk-30-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-31-1.svg)&lt;!-- --&gt;
 
 
   
@@ -1172,7 +1170,7 @@ datasets::swiss %&gt;%
    geom_point()
 ```
 
-![](index_files/figure-html/unnamed-chunk-31-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-32-1.svg)&lt;!-- --&gt;
 
 
 ---
@@ -1244,7 +1242,7 @@ mtcars %&gt;%
   geom_point()
 ```
 
-![](index_files/figure-html/unnamed-chunk-33-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-34-1.svg)&lt;!-- --&gt;
 
 
 ---
@@ -1261,7 +1259,7 @@ mtcars %&gt;%
 * facet_wrap(~ am) # vars(am)
 ```
 
-![](index_files/figure-html/unnamed-chunk-34-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-35-1.svg)&lt;!-- --&gt;
 
 ---
 
@@ -1277,7 +1275,7 @@ mtcars %&gt;%
 * facet_wrap(gear ~ am) # ou vars(gear, am)
 ```
 
-![](index_files/figure-html/unnamed-chunk-35-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-36-1.svg)&lt;!-- --&gt;
 
 
 ---
@@ -1294,7 +1292,7 @@ mtcars %&gt;%
 * facet_grid(gear ~ am)
 ```
 
-![](index_files/figure-html/unnamed-chunk-36-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-37-1.svg)&lt;!-- --&gt;
 
 
 ---
@@ -1311,7 +1309,7 @@ mtcars %&gt;%
 * facet_grid(gear ~ am, labeller = label_both)
 ```
 
-![](index_files/figure-html/unnamed-chunk-37-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-38-1.svg)&lt;!-- --&gt;
 
 
 
@@ -1330,7 +1328,7 @@ mtcars %&gt;%
 * facet_grid(gear ~ am, labeller = label_both, scales = 'free')
 ```
 
-![](index_files/figure-html/unnamed-chunk-38-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-39-1.svg)&lt;!-- --&gt;
 
 
 ---
@@ -1349,7 +1347,7 @@ mtcars %&gt;%
 *                  ifelse(am == 0, 'automatique', 'manuelle')))
 ```
 
-![](index_files/figure-html/unnamed-chunk-39-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-40-1.svg)&lt;!-- --&gt;
 
 --
 
@@ -1544,7 +1542,7 @@ Inclus :
 
 - `theme_bw()` : noir et blanc
 
-![](index_files/figure-html/unnamed-chunk-40-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-41-1.svg)&lt;!-- --&gt;
 
 ---
 
@@ -1554,7 +1552,7 @@ Inclus :
 
 - `theme_minimal()` : minimaliste
 
-![](index_files/figure-html/unnamed-chunk-41-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-42-1.svg)&lt;!-- --&gt;
 
 
 ---
@@ -1565,7 +1563,7 @@ Inclus :
 
 - `theme_gray()` : gris
 
-![](index_files/figure-html/unnamed-chunk-42-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-43-1.svg)&lt;!-- --&gt;
 
 ---
 
@@ -1575,7 +1573,7 @@ Package ![:package_cran ggthemes] :
 
 - `theme_fivethirtyeight()`
 
-![](index_files/figure-html/unnamed-chunk-43-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-44-1.svg)&lt;!-- --&gt;
 
 ---
 
@@ -1585,7 +1583,7 @@ Package ![:package_cran ggthemes] :
 
 - `theme_few()`
 
-![](index_files/figure-html/unnamed-chunk-44-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-45-1.svg)&lt;!-- --&gt;
 
 ---
 
@@ -1595,7 +1593,7 @@ Package ![:package_cran ggthemes] :
 
 - `theme_excel()`
 
-![](index_files/figure-html/unnamed-chunk-45-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-46-1.svg)&lt;!-- --&gt;
 
 --
 

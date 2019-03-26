@@ -15,6 +15,7 @@ Just clone and open the html!
 To build the presentation, one needs the 📦 [`tidyverse`](https://cran.r-project.org/package=tidyverse) package and some required packages to build the individual slides:
 
 - 📦 [`nycflights13`](https://cran.r-project.org/package=nycflights13)
+- 📦 [`DT`](https://cran.r-project.org/package=DT)
 - 📦 [`maps`](https://cran.r-project.org/package=maps)
 - 📦 [`plotly`](https://cran.r-project.org/package=plotly)
 - 📦 [`gganimate`](https://cran.r-project.org/package=gganimate)

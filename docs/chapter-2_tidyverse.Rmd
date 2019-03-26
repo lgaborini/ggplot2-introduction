@@ -97,9 +97,23 @@ Données sur les vols de New York en 2013 : ![:package_cran nycflights13]
 
 --
 
-```{r}
+```{r, echo=TRUE, eval=FALSE}
 library(nycflights13)
-head(flights, 4)
+head(flights, 20)
+```
+
+```{r, echo=FALSE}
+# This chunk does the real work to display the data
+library(nycflights13)
+requireNamespace('DT')
+
+DT::datatable(
+  head(flights, 20),
+  fillContainer = FALSE, 
+  options = list(pageLength = 7, lengthChange = FALSE, scrollX = TRUE),
+  class = 'compact',
+  elementId = 'DT-flights'
+)
 ```
 
 ---
