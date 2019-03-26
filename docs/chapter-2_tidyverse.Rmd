@@ -75,8 +75,9 @@ Auteur principal : Hadley Wickham (https://github.com/hadley/)
 --
 
 <div class="heavy-box">
-    <pre class="code-normal code-inline">f(x,y)</pre> une fonction <br/>
-    <pre class="code-normal code-inline">x %>% f(y)</pre> est équivalent à : <pre class="code-normal code-inline">f(x,y)</pre>
+    <pre class="remark-inline-code code-inline">f(x,y)</pre> une fonction <br/>
+    <pre class="remark-inline-code code-inline">x %>% f(y)</pre> est équivalent à <pre class="remark-inline-code code-inline">f(x,y)</pre><br/>
+    <h5 style="display: inline">Lecture de gauche à droite !</h5>
 </div>
 
 - très bonne documentation : R help, sites Internet, blogs, github

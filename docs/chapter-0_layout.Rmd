@@ -3,3 +3,4 @@
 layout: true
 
 <div class="ribbon-advanced"><span>Advanced!</span></div>
+<div id='overlay'></div>

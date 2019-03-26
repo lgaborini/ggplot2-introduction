@@ -49,10 +49,11 @@ Source: https://www.cssportal.com/css-ribbon-generator/
 
 /* Hide ribbon by default */
 
-.remark-slide .ribbon-advanced {
+.ribbon-advanced {
 	display: none;
 }
 
-.remark-slide .slide-class-advanced .ribbon-advanced {
+.slide-class-advanced .ribbon-advanced {
 	display: block;
 }
+

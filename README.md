@@ -33,7 +33,13 @@ It contains several customizations, tricks and hacks:
 - the "advanced" CSS ribbon on difficult slides: `assets/css/ribbon-advanced.css`   
   It is always present (layout slide), but shown only if a slide has CSS class `slide-class-advanced`.
 
-- the macro to link to CRAN: `assets/js/macros.js`    
+- the half-opaque overlay with CSS id "#overlay", to shield the content behind a popup.     
+  It is always present (layout slide) but hidden. Currently not used!
+
+- Code wrapping in code chunks: `assets/css/custom.css` 
+  CSS class `.left-code`. Has some issues with spaces, but it works more or less.
+
+- the `remarkjs` macro to link to CRAN: `assets/js/macros.js`    
   Usage: write somewhere `![:package_cran xaringan]` to make a pretty link with emoji.
 
 - some CSS popups: `assets/css/custom.css`    

@@ -125,6 +125,17 @@ pre {
   box-shadow: 6px 10px 6px -6px #777;
 }
 
+/* Half-transparent blackout */
+#overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #00000030;
+    display: none;
+    z-index: 1;
+}
 
 /* --- Slide classes ---- */
 
