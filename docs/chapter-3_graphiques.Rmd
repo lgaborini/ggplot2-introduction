@@ -6,7 +6,7 @@ class: center, middle, inverse
 
 ---
 
-# R: base graphics
+# R : base graphics
 
 Ce qu'on apprend aux premiers courses : "`base`"
 
@@ -30,7 +30,7 @@ Ce qu'on apprend aux premiers courses : "`base`"
 
 ---
 
-# R: base graphics
+# R : base graphics
 
 Exemple : 
 
@@ -42,7 +42,7 @@ title('Poids vs. consommation')
 ---
 class: twocol-code-plot
 
-# R: base graphics, groupes
+# R : base graphics, groupes
 
 Avec **données groupées** ça se complique !
 
@@ -76,7 +76,7 @@ legend('topright',
 ---
 class: twocol-code-plot
 
-# R: base graphics, multiples
+# R : base graphics, multiples
 
 .left-code[
 
@@ -100,7 +100,7 @@ for (cyl_sub in unique(mtcars$cyl)) {
 ]
 ---
 
-# R: base graphics
+# R : base graphics
 
 Inconvénients : 
 

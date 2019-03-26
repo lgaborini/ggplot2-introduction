@@ -96,8 +96,31 @@ pre {
   padding-left: 1%;
 }
 
+
+.left-code-60 {
+  width: 68%;
+  height: 92%;
+  float: left;
+}
+.right-plot-30 {
+  width: 30%;
+  float: right;
+  padding-left: 1%;
+}
+
+
 /* Code with automatic word-wrap */
 .left-code code {
+  font-size: 14px;
+  text-align: left;
+  overflow: hidden;
+  white-space: pre-wrap;       /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+.left-code-60 code {
   font-size: 14px;
   text-align: left;
   overflow: hidden;

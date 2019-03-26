@@ -8,7 +8,7 @@ class: center, middle, inverse
 
 # Grammaire des graphiques
 
-Un graphique est une combinaison d'éléments indépendants (**layers**):
+Un graphique est une combinaison d'éléments indépendants (**layers**) :
 
 - <b>`data`</b> : un jeu de données 
 
@@ -19,7 +19,7 @@ Un graphique est une combinaison d'éléments indépendants (**layers**):
 --
 
     corréspondance entre les variables dans `data` et les variables graphiques
-- <b>`geom`</b> : un objet graphique (point, ligne, cercle,...) qui sera montré
+- <b>`geom`</b> : un objet graphique (point, ligne, cercle, ...) qui sera montré
 
 --
 

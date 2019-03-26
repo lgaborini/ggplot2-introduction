@@ -49,7 +49,7 @@ class: inverse
 
 ### Contrôles
 
-Pressez `h` pour contrôler la présentation.
+Appuyer sur **h** ou **?** pour contrôler la présentation.
 
 ---
 
@@ -429,7 +429,7 @@ class: center, middle, inverse
 
 ---
 
-# R: base graphics
+# R : base graphics
 
 Ce qu'on apprend aux premiers courses : "`base`"
 
@@ -453,7 +453,7 @@ Ce qu'on apprend aux premiers courses : "`base`"
 
 ---
 
-# R: base graphics
+# R : base graphics
 
 Exemple : 
 
@@ -468,7 +468,7 @@ title('Poids vs. consommation')
 ---
 class: twocol-code-plot
 
-# R: base graphics, groupes
+# R : base graphics, groupes
 
 Avec **données groupées** ça se complique !
 
@@ -501,7 +501,7 @@ legend('topright',
 ---
 class: twocol-code-plot
 
-# R: base graphics, multiples
+# R : base graphics, multiples
 
 .left-code[
 
@@ -524,7 +524,7 @@ for (cyl_sub in unique(mtcars$cyl)) {
 ]
 ---
 
-# R: base graphics
+# R : base graphics
 
 Inconvénients : 
 
@@ -1751,6 +1751,202 @@ ggplot(mtcars) +
 
 ![](index_files/figure-html/annotate-plot-1.svg)&lt;!-- --&gt;
 
+
+---
+class: slide-class-advanced
+
+# Géométries : paramètre `data`
+
+--
+
+`data` : un `data.frame`, mais aussi une fonction (![:read_the_docs]) :
+
+&gt;    A function will be called with a single argument, the plot data.   
+&gt;    The return value must be a `data.frame`, and will be used as the layer data.
+
+--
+
+## Ou : comment étiqueter les outliers
+
+Outliers : automobiles trop lourdes
+
+--
+
+Préliminaires : noms des automobiles dans une colonne (![:package_cran tidyr])
+
+
+
+.left-code[
+
+```r
+mtcars_with_models &lt;- mtcars %&gt;% 
+    rownames_to_column('model')
+
+p &lt;- mtcars_with_models %&gt;% 
+  ggplot(aes(x = mpg, y = wt)) +
+    geom_point(aes(col = factor(cyl)))
+```
+]
+
+.right-plot[
+&lt;img src="index_files/figure-html/unnamed-chunk-50-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+]
+
+
+
+---
+class: slide-class-advanced small-code
+name: slide-data-advanced
+
+## Ou : comment étiqueter les outliers
+
+---
+template: slide-data-advanced
+
+#### Approche 1 : une étiquette vide
+&lt;br/&gt;
+
+.left-code-60[
+
+```r
+heavy_cars &lt;- quantile(mtcars$wt, 0.9)
+
+mtcars_with_models %&gt;% 
+  ggplot(aes(x = mpg, y = wt)) +
+    geom_point(aes(col = factor(cyl))) +
+    geom_text(aes(label = 
+*       ifelse(wt &gt; heavy_cars, model, '')),
+      hjust = -0.1, vjust = 0.5)
+```
+]
+.right-plot-30[
+&lt;img src="index_files/figure-html/unnamed-chunk-52-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+template: slide-data-advanced
+
+#### Approche 2 : filtrage du `data`
+
+Répétition de `data` (sans ne pouvoir rien ajouter avant `ggplot` ! )
+
+.left-code-60[
+
+```r
+heavy_cars &lt;- quantile(mtcars$wt, 0.9)
+
+mtcars_with_models %&gt;% 
+  ggplot(aes(x = mpg, y = wt)) +
+    geom_point(aes(col = factor(cyl))) +
+    geom_text(aes(label = model),
+      hjust = -0.1, vjust = 0.5,
+      data = filter(mtcars_with_models, 
+*       wt &gt; heavy_cars)
+  )
+```
+]
+.right-plot-30[
+&lt;img src="index_files/figure-html/unnamed-chunk-54-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+template: slide-data-advanced
+
+#### Approche 3 : pipe
+
+Dans une pipe, `.` indique le premier argument (le résultat avant `ggplot`).&lt;sup&gt;1&lt;/sup&gt;
+
+.left-code-60[
+
+```r
+heavy_cars &lt;- quantile(mtcars$wt, 0.9)
+
+mtcars_with_models %&gt;% 
+  ggplot(aes(x = mpg, y = wt)) +
+    geom_point(aes(col = factor(cyl))) +
+    geom_text(aes(label = model),
+      hjust = -0.1, vjust = 0.5,
+*     data = . %&gt;% filter(wt &gt; heavy_cars)
+  )
+```
+]
+.right-plot-30[
+&lt;img src="index_files/figure-html/unnamed-chunk-56-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+]
+
+.footnote[
+[1] Mon approche préféré !
+]
+
+---
+template: slide-data-advanced
+
+#### Approche 4 : une fonction
+
+J'utilise la caractéristique du paramètre ! &lt;sup&gt;1&lt;/sup&gt;
+
+.left-code-60[
+
+```r
+heavy_cars &lt;- quantile(mtcars$wt, 0.9)
+
+*my_filter &lt;- function(x) {
+* filter(x, wt &gt; heavy_cars)
+*} 
+
+mtcars_with_models %&gt;% 
+  ggplot(aes(x = mpg, y = wt)) +
+    geom_point(aes(col = factor(cyl))) +
+    geom_text(aes(label = model),
+      hjust = -0.1, vjust = 0.5,
+*     data = my_filter
+  )
+```
+]
+.right-plot-30[
+&lt;img src="index_files/figure-html/unnamed-chunk-58-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+]
+.footnote[
+[1] Pourquoi est-ce que `my_filter` arrive à bien trouver `heavy_cars` ? ( difficile ! )   
+    La réponse est [ici](https://adv-r.hadley.nz/functions.html)...
+]
+
+
+---
+template: slide-data-advanced
+
+#### Approche 5 : une fonction qui retourne une fonction...
+
+Pour conditions multiples&lt;sup&gt;1&lt;/sup&gt; ! **Quasiquotation**&lt;sup&gt;2&lt;/sup&gt;!
+
+.left-code-60[
+
+```r
+*filter_df &lt;- function(...) {
+* condition &lt;- enquos(...)
+* function(df) {
+*   df %&gt;% filter(!!!condition)
+* }
+*} 
+
+mtcars_with_models %&gt;% 
+  ggplot(aes(x = mpg, y = wt)) +
+    geom_point(aes(col = factor(cyl))) +
+    geom_text(aes(label = model),
+      hjust = -0.1, vjust = 0.5,
+*     data = filter_df(wt &gt; quantile(wt, 0.9))
+  )
+```
+]
+.right-plot-30[
+&lt;img src="index_files/figure-html/unnamed-chunk-60-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+]
+
+.footnote[
+[1] Ça permet d'enchaîner plusieurs conditions à la `filter` : p.ex.   
+    `filter_df(wt &gt; quantile(wt, 0.9), str_detect(model, 'Audi'))`    
+[2] Encore plus difficile ! Explications [ici](https://adv-r.hadley.nz/quasiquotation.html)...   
+]
 
 
 
