@@ -63,3 +63,172 @@ ggplot(mtcars) +
       alpha = .2, fill = 'red')
 ```
 
+
+---
+class: slide-class-advanced
+
+# Géométries : paramètre `data`
+
+--
+
+`data` : un `data.frame`, mais aussi une fonction (![:read_the_docs]) :
+
+>    A function will be called with a single argument, the plot data.   
+>    The return value must be a `data.frame`, and will be used as the layer data.
+
+--
+
+## ou: comment étiquetter les outliers
+
+Outliers : automobiles trop lourdes
+
+--
+
+Préliminaires : noms des automobiles dans une colonne (![:package_cran tidyr])
+
+```{r, include=FALSE}
+# To set figure height in next slides
+
+fig_height_outliers <- 3
+```
+
+.left-code[
+```{r, opts.label='twocol_code'}
+mtcars_with_models <- mtcars %>% 
+    rownames_to_column('model')
+
+p <- mtcars_with_models %>% 
+  ggplot(aes(x = mpg, y = wt)) +
+    geom_point(aes(col = factor(cyl)))
+```
+]
+
+.right-plot[
+```{r, opts.label='twocol_plot', fig.height=fig_height_outliers}
+p
+```
+]
+
+
+
+---
+class: slide-class-advanced small-code
+name: slide-data-advanced
+
+## ou: comment étiquetter les outliers
+
+---
+template: slide-data-advanced
+
+#### Approche 1 : une étiquette vide
+
+```{r, fig.height = fig_height_outliers}
+heavy_cars <- quantile(mtcars$wt, 0.9)
+
+mtcars_with_models %>% 
+  ggplot(aes(x = mpg, y = wt)) +
+    geom_point(aes(col = factor(cyl))) +
+    geom_text(aes(label = ifelse(wt > heavy_cars, model, '')), #<<
+      hjust = -0.1, vjust = 0.5)
+```
+
+
+---
+template: slide-data-advanced
+
+#### Approche 2 : filtrage du `data`
+
+Répétition de `data` (sans ne pouvoir rien ajouter avant `ggplot` ! )
+
+```{r, fig.height = fig_height_outliers}
+heavy_cars <- quantile(mtcars$wt, 0.9)
+
+mtcars_with_models %>% 
+  ggplot(aes(x = mpg, y = wt)) +
+    geom_point(aes(col = factor(cyl))) +
+    geom_text(aes(label = model),
+      hjust = -0.1, vjust = 0.5,
+      data = filter(mtcars_with_models, wt > heavy_cars) #<<
+  )
+             # data = . %>% filter(cyl %in% c(2,4)))
+
+```
+
+
+---
+template: slide-data-advanced
+
+#### Approche 3 : pipe
+
+Dans une pipe, `.` indique le premier argument (le résultat avant `ggplot`)
+
+```{r, fig.height = fig_height_outliers}
+heavy_cars <- quantile(mtcars$wt, 0.9)
+
+mtcars_with_models %>% 
+  ggplot(aes(x = mpg, y = wt)) +
+    geom_point(aes(col = factor(cyl))) +
+    geom_text(aes(label = model),
+      hjust = -0.1, vjust = 0.5,
+      data = . %>% filter(wt > heavy_cars) #<<
+  )
+
+```
+
+
+---
+template: slide-data-advanced
+
+#### Approche 4 : une fonction
+
+J'utilise la caractéristique du paramètre ! <sup>1</sup>
+
+```{r, fig.height = fig_height_outliers}
+heavy_cars <- quantile(mtcars$wt, 0.9)
+
+my_filter <- function(x) {   #<< 
+  filter(x, wt > heavy_cars)     #<<
+}   #<<
+
+mtcars_with_models %>% 
+  ggplot(aes(x = mpg, y = wt)) +
+    geom_point(aes(col = factor(cyl))) +
+    geom_text(aes(label = model),
+      hjust = -0.1, vjust = 0.5,
+      data = my_filter #<<
+  )
+
+```
+
+.footnote[
+[1] Pourquoi est-ce que `my_filter` arrive à bien trouver `heavy_cars` ? ( difficile ! )   
+    La réponse est [ici](https://adv-r.hadley.nz/functions.html)...
+]
+
+
+---
+template: slide-data-advanced
+
+#### Approche 5 : une fonction générique
+
+Pour condition multiples. **Quasiquotation**<sup>1</sup>!
+
+```{r, fig.height = fig_height_outliers}
+filter_df <- function(...) { #<<
+  condition <- enquos(...)    #<<
+  function(df) { df %>% filter(!!!condition) } #<<
+} #<<
+
+mtcars_with_models %>% 
+  ggplot(aes(x = mpg, y = wt)) +
+    geom_point(aes(col = factor(cyl))) +
+    geom_text(aes(label = model),
+      hjust = -0.1, vjust = 0.5,
+      data = filter_df(wt > quantile(wt, 0.9)) #<<
+  )
+
+```
+
+.footnote[
+[1] Encore plus difficile ! Explications [ici](https://adv-r.hadley.nz/quasiquotation.html)...
+]
