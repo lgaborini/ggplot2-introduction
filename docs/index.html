@@ -173,6 +173,13 @@ Auteur principal : Hadley Wickham (https://github.com/hadley/)
 
 --
 
+- très bonne documentation : R help, sites Internet, blogs, github
+
+---
+
+## Caractéristiques communes : pipe
+
+
 - le **flux d'informations** est indiqué avec l'opérateur `%&gt;%` (**pipe**)
 
 --
@@ -183,14 +190,39 @@ Auteur principal : Hadley Wickham (https://github.com/hadley/)
     &lt;h5 style="display: inline"&gt;Lecture de gauche à droite !&lt;/h5&gt;
 &lt;/div&gt;
 
-- très bonne documentation : R help, sites Internet, blogs, github
+- Clavier (R Studio) : par défault
+  + Windows : CTRL + ⇧ + M
+  + Mac : ⌘ + ⇧ + M
+
+
+---
+
+## Caractéristiques communes : données rectangulaires
+
+Dans le `tidyverse` on travaille avec :
+
+&lt;div class="heavy-box"&gt;
+&lt;span&gt;&lt;b&gt;données rectangulaires&lt;/b&gt; (&lt;b&gt;tidy data&lt;/b&gt;)&lt;/span&gt;&lt;/br&gt;
+&lt;span&gt;chaque ligne est une observation, chaque colonne est une variable&lt;/span&gt;
+&lt;/div&gt;
+
+--
+![:package_cran tidyr] vous aide ! (anciennement : ![:package_cran reshape2])
 
 --
 
-&lt;div class="heavy-box"&gt;
-&lt;p&gt;&lt;b&gt;données rectangulaires&lt;/b&gt; (&lt;b&gt;tidy data&lt;/b&gt;)&lt;/p&gt;
-&lt;p&gt;chaque ligne est une observation, chaque colonne est une variable&lt;/p&gt;
-&lt;/div&gt;
+.img-small-80[
+  .pull-left[
+    ![](assets/img/gather.png)
+  ]
+  .pull-right[
+    ![](assets/img/spread.png)
+  ]
+]
+
+Aussi: `separate`, `unite`, ...   
+
+![:read_the_docs] : [Data Import cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf)
 
 ---
 
@@ -380,7 +412,6 @@ class: center, middle, inverse
 
    + données → "je regroupe → je transforme → je simplifie"
 
-&lt;!-- TODO: spread/gather, quite important! --&gt;
 
 
 
@@ -1871,8 +1902,8 @@ Conseils :
 - suivez des blogs 
   + [RStudio Blog](https://blog.rstudio.com/) 
   + [R-bloggers](https://www.r-bloggers.com/)
-  + [Timo Grossenbacher (SRF Data)](https://timogrossenbacher.ch/blog/)
-  + [SRF Data](https://srfdata.github.io/)
+  + [Timo Grossenbacher (SRF Data)](https://timogrossenbacher.ch/blog/) (🇩🇪)
+  + [SRF Data](https://srfdata.github.io/) (🇩🇪)
 - copiez les exemples de GitHub
 - expérimentez !
 

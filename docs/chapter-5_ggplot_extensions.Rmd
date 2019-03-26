@@ -53,7 +53,7 @@ pl <- ggplot(mtcars, aes(x = mpg, y = wt)) + geom_point()
 
 pl_gg <- ggplotly(pl, width=600, height=250)
 
-dir.create(here('widgets'))
+dir.create(here('widgets'), showWarnings=FALSE)
 htmltools::save_html(pl_gg, file=here("widgets/plotly_figure.html"))
 ```
 <iframe src="widgets/plotly_figure.html" width="600" height="300" scrolling="no" seamless="seamless" frameBorder="0"></iframe>
@@ -102,7 +102,7 @@ class: small-code
 Approche à la `tidyverse` : package ![:package_cran sf]
 
 --
-```{r sf, fig.height = 4, warning = FALSE}
+```{r sf, fig.height=4, warning=FALSE}
 library(sf)
 
 # Shapefile des cantons
@@ -170,8 +170,8 @@ Conseils :
 - suivez des blogs 
   + [RStudio Blog](https://blog.rstudio.com/) 
   + [R-bloggers](https://www.r-bloggers.com/)
-  + [Timo Grossenbacher (SRF Data)](https://timogrossenbacher.ch/blog/)
-  + [SRF Data](https://srfdata.github.io/)
+  + [Timo Grossenbacher (SRF Data)](https://timogrossenbacher.ch/blog/) (🇩🇪)
+  + [SRF Data](https://srfdata.github.io/) (🇩🇪)
 - copiez les exemples de GitHub
 - expérimentez !
 

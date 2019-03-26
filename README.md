@@ -24,7 +24,7 @@ To build the presentation, one needs the 📦 [`tidyverse`](https://cran.r-proje
 
 ## Technology
 
-The presentation was made in a weekend using R Markdown and the package 📦 [xaringan](https://github.com/yihui/xaringan).
+The presentation was made as a weekend project, using R Markdown and the package 📦 [xaringan](https://github.com/yihui/xaringan).
 
 It contains several customizations, tricks and hacks: 
 
@@ -34,10 +34,10 @@ It contains several customizations, tricks and hacks:
 - the "advanced" CSS ribbon on difficult slides: `assets/css/ribbon-advanced.css`   
   It is always present (layout slide), but shown only if a slide has CSS class `slide-class-advanced`.
 
-- the half-opaque overlay with CSS id "#overlay", to shield the content behind a popup.     
+- the half-opaque overlay with CSS id `#overlay`, to shield the content behind a popup.     
   It is always present (layout slide) but hidden. Currently not used!
 
-- Code wrapping in code chunks: `assets/css/custom.css` 
+- Code wrapping in code chunks: `assets/css/custom.css`.    
   CSS class `.left-code`. Has some issues with spaces, but it works more or less.
 
 - the `remarkjs` macro to link to CRAN: `assets/js/macros.js`    
@@ -52,3 +52,5 @@ It contains several customizations, tricks and hacks:
 - Embedding a previously-made `gganimate` animation by saving to `assets/img` directory (offline).
 
 - Gradient background on CSS class `slide-class-advanced` slides.
+
+(To CSS pros: I'm sorry!)
