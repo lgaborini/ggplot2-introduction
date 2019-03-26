@@ -9,6 +9,13 @@
   padding: 9px;
 }
 
+.title-slide.remark-slide-content:before{
+  position: absolute;
+  content: url('../img/logo_white.png');
+  left: 25px;
+  bottom: 25px;
+}
+
 /* Link color */
 a, a > code {
   color: #1482b9; /*default: rgb(249, 38, 114); || sets color of links */
