@@ -4,7 +4,7 @@ class: inverse
 
 ### Contrôles
 
-Pressez `h` pour contrôler la présentation.
+Appuyer sur `h` pour contrôler la présentation.
 
 ---
 
