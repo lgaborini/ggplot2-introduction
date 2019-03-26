@@ -62,8 +62,10 @@ pre {
   overflow: hidden;
 }
 
+/* Python in green */
 .python {
   background: #dffdd6 !important;
+  border-radius: 10px;
 }
 
 /* Two column layout: code and plot */
