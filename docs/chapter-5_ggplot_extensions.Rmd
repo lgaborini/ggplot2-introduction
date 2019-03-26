@@ -19,6 +19,9 @@ class: center, middle, inverse
 ![:package_cran gghighlight] : mise en évidence d'éléments 
 - [vignette](https://cran.r-project.org/web/packages/gghighlight/vignettes/gghighlight.html)
 
+![:package_cran ggraph] : **grammaire des graphs** 
+- Deux `data.frames` : noeds et liens...
+
 ---
 class: slide-class-advanced
 

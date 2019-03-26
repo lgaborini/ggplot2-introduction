@@ -1,5 +1,12 @@
 
 ---
+class: inverse
+
+### Contrôles
+
+Pressez `h` pour contrôler la présentation.
+
+---
 
 # Buts
 
