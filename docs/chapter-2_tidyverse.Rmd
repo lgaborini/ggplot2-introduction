@@ -70,6 +70,13 @@ Auteur principal : Hadley Wickham (https://github.com/hadley/)
 
 --
 
+- très bonne documentation : R help, sites Internet, blogs, github
+
+---
+
+## Caractéristiques communes : pipe
+
+
 - le **flux d'informations** est indiqué avec l'opérateur `%>%` (**pipe**)
 
 --
@@ -80,14 +87,39 @@ Auteur principal : Hadley Wickham (https://github.com/hadley/)
     <h5 style="display: inline">Lecture de gauche à droite !</h5>
 </div>
 
-- très bonne documentation : R help, sites Internet, blogs, github
+- Clavier (R Studio) : par défault
+  + Windows : CTRL + ⇧ + M
+  + Mac : ⌘ + ⇧ + M
+
+
+---
+
+## Caractéristiques communes : données rectangulaires
+
+Dans le `tidyverse` on travaille avec :
+
+<div class="heavy-box">
+<span><b>données rectangulaires</b> (<b>tidy data</b>)</span></br>
+<span>chaque ligne est une observation, chaque colonne est une variable</span>
+</div>
+
+--
+![:package_cran tidyr] vous aide ! (anciennement : ![:package_cran reshape2])
 
 --
 
-<div class="heavy-box">
-<p><b>données rectangulaires</b> (<b>tidy data</b>)</p>
-<p>chaque ligne est une observation, chaque colonne est une variable</p>
-</div>
+.img-small-80[
+  .pull-left[
+    ![](assets/img/gather.png)
+  ]
+  .pull-right[
+    ![](assets/img/spread.png)
+  ]
+]
+
+Aussi: `separate`, `unite`, ...   
+
+![:read_the_docs] : [Data Import cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf)
 
 ---
 
@@ -248,4 +280,3 @@ class: center, middle, inverse
 
    + données → "je regroupe → je transforme → je simplifie"
 
-<!-- TODO: spread/gather, quite important! -->

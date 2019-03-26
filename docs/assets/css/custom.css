@@ -49,6 +49,10 @@ img {
   max-width: 50%;
 }
 
+.img-small-80 img {
+  max-width: 80%;
+}
+
 .text-small {
   font-size: 70%;
 }
