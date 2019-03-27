@@ -197,7 +197,7 @@ p
 ]
 
 .footnote[
-[1] Mon approche préféré !
+[1] Mon approche préférée !
 ]
 
 ---

@@ -225,7 +225,7 @@ p + ggthemes::theme_excel()
 
 --
 
-<img src="https://media0.giphy.com/media/njl60xjwgrkWY/giphy.gif?cid=3640f6095c981f27764b434a323926c1" width="60%" class='image-popup-center'/>
+<img src="https://media0.giphy.com/media/njl60xjwgrkWY/giphy.gif?cid=3640f6095c981f27764b434a323926c1" class='image-popup-center' style='left: 80%; top: 20%; width: 30%'/>
 
 
 ---
