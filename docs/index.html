@@ -1820,7 +1820,7 @@ template: slide-data-advanced
 ```r
 heavy_cars &lt;- quantile(mtcars$wt, 0.9)
 
-mtcars_with_models %&gt;% 
+p &lt;- mtcars_with_models %&gt;% 
   ggplot(aes(x = mpg, y = wt)) +
     geom_point(aes(col = factor(cyl))) +
     geom_text(aes(label = 
@@ -1844,7 +1844,7 @@ Répétition de `data` (sans ne pouvoir rien ajouter avant `ggplot` ! )
 ```r
 heavy_cars &lt;- quantile(mtcars$wt, 0.9)
 
-mtcars_with_models %&gt;% 
+p &lt;- mtcars_with_models %&gt;% 
   ggplot(aes(x = mpg, y = wt)) +
     geom_point(aes(col = factor(cyl))) +
     geom_text(aes(label = model),
@@ -1870,7 +1870,7 @@ Dans une pipe, `.` indique le premier argument (le résultat avant `ggplot`).&lt
 ```r
 heavy_cars &lt;- quantile(mtcars$wt, 0.9)
 
-mtcars_with_models %&gt;% 
+p &lt;- mtcars_with_models %&gt;% 
   ggplot(aes(x = mpg, y = wt)) +
     geom_point(aes(col = factor(cyl))) +
     geom_text(aes(label = model),
@@ -1903,7 +1903,7 @@ heavy_cars &lt;- quantile(mtcars$wt, 0.9)
 * filter(x, wt &gt; heavy_cars)
 *} 
 
-mtcars_with_models %&gt;% 
+p &lt;- mtcars_with_models %&gt;% 
   ggplot(aes(x = mpg, y = wt)) +
     geom_point(aes(col = factor(cyl))) +
     geom_text(aes(label = model),
@@ -1938,7 +1938,7 @@ Pour conditions multiples&lt;sup&gt;1&lt;/sup&gt; ! **Quasiquotation**&lt;sup&gt
 * }
 *} 
 
-mtcars_with_models %&gt;% 
+p &lt;- mtcars_with_models %&gt;% 
   ggplot(aes(x = mpg, y = wt)) +
     geom_point(aes(col = factor(cyl))) +
     geom_text(aes(label = model),

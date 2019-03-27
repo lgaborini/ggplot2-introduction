@@ -1,5 +1,6 @@
-
 rmd := $(wildcard docs/*.Rmd)
+
+all: pdf
 
 docs/index.html: $(rmd)
 	Rscript -e "rmarkdown::render('docs/index.Rmd', encoding='UTF-8')"

@@ -128,7 +128,7 @@ template: slide-data-advanced
 ```{r, opts.label = 'twocol_code', fig.height = fig_height_outliers}
 heavy_cars <- quantile(mtcars$wt, 0.9)
 
-mtcars_with_models %>% 
+p <- mtcars_with_models %>% 
   ggplot(aes(x = mpg, y = wt)) +
     geom_point(aes(col = factor(cyl))) +
     geom_text(aes(label = 
@@ -153,7 +153,7 @@ Répétition de `data` (sans ne pouvoir rien ajouter avant `ggplot` ! )
 ```{r, opts.label = 'twocol_code', fig.height = fig_height_outliers}
 heavy_cars <- quantile(mtcars$wt, 0.9)
 
-mtcars_with_models %>% 
+p <- mtcars_with_models %>% 
   ggplot(aes(x = mpg, y = wt)) +
     geom_point(aes(col = factor(cyl))) +
     geom_text(aes(label = model),
@@ -180,7 +180,7 @@ Dans une pipe, `.` indique le premier argument (le résultat avant `ggplot`).<su
 ```{r, opts.label = 'twocol_code', fig.height = fig_height_outliers}
 heavy_cars <- quantile(mtcars$wt, 0.9)
 
-mtcars_with_models %>% 
+p <- mtcars_with_models %>% 
   ggplot(aes(x = mpg, y = wt)) +
     geom_point(aes(col = factor(cyl))) +
     geom_text(aes(label = model),
@@ -215,7 +215,7 @@ my_filter <- function(x) {   #<<
   filter(x, wt > heavy_cars)     #<<
 }   #<<
 
-mtcars_with_models %>% 
+p <- mtcars_with_models %>% 
   ggplot(aes(x = mpg, y = wt)) +
     geom_point(aes(col = factor(cyl))) +
     geom_text(aes(label = model),
@@ -252,7 +252,7 @@ filter_df <- function(...) { #<<
   } #<<
 } #<<
 
-mtcars_with_models %>% 
+p <- mtcars_with_models %>% 
   ggplot(aes(x = mpg, y = wt)) +
     geom_point(aes(col = factor(cyl))) +
     geom_text(aes(label = model),
