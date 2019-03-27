@@ -10,7 +10,7 @@ It is a quite thorough introduction to 📦 [`ggplot2`](https://cran.r-project.o
 
 ## Prerequisites
 
-Slides built with 📦 [xaringan](https://github.com/yihui/xaringan), an R wrapper around [reveal.js](https://revealjs.com/).   
+Slides built with 📦 [xaringan](https://github.com/yihui/xaringan), an R wrapper around [remark.js](http://remarkjs.com/).   
 Just clone the repository and open the html!
 
 To build the presentation, one needs the 📦 [`tidyverse`](https://cran.r-project.org/package=tidyverse) package and some required packages to build the individual slides:
