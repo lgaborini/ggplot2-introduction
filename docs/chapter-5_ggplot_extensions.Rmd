@@ -22,6 +22,7 @@ class: center, middle, inverse
 ![:package_cran ggraph] : **grammaire des graphs** 
 - Deux `data.frames` : noeds et liens...
 
+
 ---
 class: slide-class-advanced
 
@@ -35,7 +36,7 @@ class: slide-class-advanced
 
 --
 
-```{r ggplotly, fig.height=4, eval=FALSE}
+```{r ggplotly, eval=FALSE}
 library(plotly)
 
 pl <- ggplot(mtcars, aes(x = mpg, y = wt)) + geom_point()
@@ -52,17 +53,24 @@ ggplotly(pl) #<<
 requireNamespace('htmltools')
 library(plotly)
 
+plotly_width <- 700
+plotly_height <- 200
+plotly_iframe_width <- '100%'
+plotly_iframe_height <- plotly_height + 50
+
 pl <- ggplot(mtcars, aes(x = mpg, y = wt)) + geom_point()
 
-pl_gg <- ggplotly(pl, width=600, height=250)
+pl_gg <- ggplotly(pl, width=plotly_width, height=plotly_height)
+# pl_gg <- pl_gg %>% layout(autosize = F)
 
 dir.create(here('widgets'), showWarnings=FALSE)
 htmltools::save_html(pl_gg, file=here("widgets/plotly_figure.html"))
 ```
-<iframe src="widgets/plotly_figure.html" width="600" height="300" scrolling="no" seamless="seamless" frameBorder="0"></iframe>
+<iframe src="widgets/plotly_figure.html" width="`r plotly_iframe_width`" height="`r plotly_iframe_height`" scrolling="no" seamless="seamless" frameBorder="0"></iframe>
 
 
 ---
+
 # Animations
 
 Package ![:package_cran gganimate]
@@ -123,7 +131,6 @@ ggplot(shp) +
 
 ---
 class: small-code slide-class-advanced
-exclude: true
 
 # Graphs
 

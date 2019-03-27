@@ -1,6 +1,7 @@
 
 ---
 class: center, middle, inverse
+name: slide-grammaire-graphiques
 
 # La **grammaire des graphiques**
 

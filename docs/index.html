@@ -36,7 +36,6 @@ class: center, middle, inverse, title-slide
 
 
 
----
 layout: true
 
 &lt;div class="ribbon-advanced"&gt;&lt;span&gt;Advanced!&lt;/span&gt;&lt;/div&gt;
@@ -49,7 +48,7 @@ class: inverse
 
 ### Contrôles
 
-Appuyer sur **h** ou **?** pour contrôler la présentation.
+Appuyer sur &lt;span class="help-key"&gt;h&lt;/span&gt; ou &lt;span class="help-key"&gt;?&lt;/span&gt; pour contrôler la présentation.
 
 ---
 
@@ -193,11 +192,20 @@ Auteur principal : Hadley Wickham (https://github.com/hadley/)
 
 &lt;div class="heavy-box"&gt;
     &lt;pre class="remark-inline-code code-inline"&gt;f(x,y)&lt;/pre&gt; une fonction &lt;br/&gt;
-    &lt;pre class="remark-inline-code code-inline"&gt;x %&gt;% f(y)&lt;/pre&gt; est équivalent à &lt;pre class="remark-inline-code code-inline"&gt;f(x,y)&lt;/pre&gt;&lt;br/&gt;
-    &lt;h5 style="display: inline"&gt;Lecture de gauche à droite !&lt;/h5&gt;
+    &lt;pre class="remark-inline-code code-inline"&gt;x %&gt;% f(y)&lt;/pre&gt; est équivalent à &lt;pre class="remark-inline-code code-inline"&gt;f(x,y)&lt;/pre&gt;
 &lt;/div&gt;
 
-- Clavier (R Studio) : par défault
+--
+
+- Conséquence :   
+
+&lt;div class="heavy-box"&gt;
+    &lt;h5 style="display: inline"&gt;Lecture de gauche à droite !&lt;/h5&gt;&lt;br/&gt;
+    &lt;pre class="remark-inline-code code-inline"&gt;x %&gt;% f(y)&lt;/pre&gt; : 
+    &lt;pre class="remark-inline-code code-inline"&gt;x&lt;/pre&gt; &lt;b&gt;"then"&lt;/b&gt; &lt;pre class="remark-inline-code code-inline"&gt;f(y)&lt;/pre&gt;
+&lt;/div&gt;
+
+- Clavier (R Studio) : par défaut
   + Windows : CTRL + ⇧ + M
   + Mac : ⌘ + ⇧ + M
 
@@ -495,7 +503,7 @@ legend('topright',
 --
 
 .right-plot[
-&lt;img src="index_files/figure-html/unnamed-chunk-18-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-19-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -520,7 +528,7 @@ for (cyl_sub in unique(mtcars$cyl)) {
 ]
 .right-plot[
 
-&lt;img src="index_files/figure-html/unnamed-chunk-19-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-20-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
 ]
 ---
 
@@ -551,6 +559,7 @@ Inconvénients :
 
 ---
 class: center, middle, inverse
+name: slide-grammaire-graphiques
 
 # La **grammaire des graphiques**
 
@@ -558,7 +567,7 @@ class: center, middle, inverse
 
 # Grammaire des graphiques
 
-Un graphique est une combinaison d'éléments indépendants (**layers**):
+Un graphique est une combinaison d'éléments indépendants (**layers**) :
 
 - &lt;b&gt;`data`&lt;/b&gt; : un jeu de données 
 
@@ -569,7 +578,7 @@ Un graphique est une combinaison d'éléments indépendants (**layers**):
 --
 
     corréspondance entre les variables dans `data` et les variables graphiques
-- &lt;b&gt;`geom`&lt;/b&gt; : un objet graphique (point, ligne, cercle,...) qui sera montré
+- &lt;b&gt;`geom`&lt;/b&gt; : un objet graphique (point, ligne, cercle, ...) qui sera montré
 
 --
 
@@ -636,7 +645,7 @@ ggplot(mtcars) +
 
 .right-plot[
 
-&lt;img src="index_files/figure-html/unnamed-chunk-20-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-21-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -666,7 +675,7 @@ p
 --
 .right-plot[
 
-&lt;img src="index_files/figure-html/unnamed-chunk-21-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-22-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
 ]
 ---
 class: twocol-code-plot
@@ -692,7 +701,7 @@ ggplot(mtcars) +
 ]
 --
 .right-plot[
-&lt;img src="index_files/figure-html/unnamed-chunk-22-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-23-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
 ]
 
 
@@ -787,7 +796,7 @@ ggplot(mtcars) +
     labs(title = 'Rapport puissance/poids', x = 'Mile time [s]', y = 'Autonomie')
 ```
 
-![](index_files/figure-html/unnamed-chunk-23-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-24-1.svg)&lt;!-- --&gt;
 ]
 
 ---
@@ -936,7 +945,7 @@ ggplot(mtcars) +
   geom_bar(aes(x = factor(cyl), fill = factor(am)))
 ```
 
-![](index_files/figure-html/unnamed-chunk-25-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-26-1.svg)&lt;!-- --&gt;
 
 ---
 
@@ -953,7 +962,7 @@ ggplot(mtcars) +
 *          position = 'dodge')
 ```
 
-![](index_files/figure-html/unnamed-chunk-26-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-27-1.svg)&lt;!-- --&gt;
 
 ---
 
@@ -970,7 +979,7 @@ ggplot(mtcars) +
 *          position = 'fill')
 ```
 
-![](index_files/figure-html/unnamed-chunk-27-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-28-1.svg)&lt;!-- --&gt;
 
 ---
 
@@ -987,7 +996,7 @@ ggplot(mtcars) +
 *          position = 'stack')
 ```
 
-![](index_files/figure-html/unnamed-chunk-28-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-29-1.svg)&lt;!-- --&gt;
 
 
 ---
@@ -1004,7 +1013,7 @@ ggplot(mtcars) +
   geom_point(aes(x = am, y = vs))
 ```
 
-![](index_files/figure-html/unnamed-chunk-29-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-30-1.svg)&lt;!-- --&gt;
 
 ---
 
@@ -1021,7 +1030,7 @@ ggplot(mtcars) +
 *          position = 'jitter')
 ```
 
-![](index_files/figure-html/unnamed-chunk-30-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-31-1.svg)&lt;!-- --&gt;
 
 
 ---
@@ -1041,7 +1050,7 @@ ggplot(mtcars) +
 *            position = position_jitter(width = 0.1, height = 0.1))
 ```
 
-![](index_files/figure-html/unnamed-chunk-31-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-32-1.svg)&lt;!-- --&gt;
 
 
   
@@ -1210,7 +1219,7 @@ datasets::swiss %&gt;%
    geom_point()
 ```
 
-![](index_files/figure-html/unnamed-chunk-32-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-33-1.svg)&lt;!-- --&gt;
 
 
 ---
@@ -1282,7 +1291,7 @@ mtcars %&gt;%
   geom_point()
 ```
 
-![](index_files/figure-html/unnamed-chunk-34-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-35-1.svg)&lt;!-- --&gt;
 
 
 ---
@@ -1299,7 +1308,7 @@ mtcars %&gt;%
 * facet_wrap(~ am) # vars(am)
 ```
 
-![](index_files/figure-html/unnamed-chunk-35-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-36-1.svg)&lt;!-- --&gt;
 
 ---
 
@@ -1315,7 +1324,7 @@ mtcars %&gt;%
 * facet_wrap(gear ~ am) # ou vars(gear, am)
 ```
 
-![](index_files/figure-html/unnamed-chunk-36-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-37-1.svg)&lt;!-- --&gt;
 
 
 ---
@@ -1332,7 +1341,7 @@ mtcars %&gt;%
 * facet_grid(gear ~ am)
 ```
 
-![](index_files/figure-html/unnamed-chunk-37-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-38-1.svg)&lt;!-- --&gt;
 
 
 ---
@@ -1349,7 +1358,7 @@ mtcars %&gt;%
 * facet_grid(gear ~ am, labeller = label_both)
 ```
 
-![](index_files/figure-html/unnamed-chunk-38-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-39-1.svg)&lt;!-- --&gt;
 
 
 
@@ -1368,7 +1377,7 @@ mtcars %&gt;%
 * facet_grid(gear ~ am, labeller = label_both, scales = 'free')
 ```
 
-![](index_files/figure-html/unnamed-chunk-39-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-40-1.svg)&lt;!-- --&gt;
 
 
 ---
@@ -1387,7 +1396,7 @@ mtcars %&gt;%
 *                  ifelse(am == 0, 'automatique', 'manuelle')))
 ```
 
-![](index_files/figure-html/unnamed-chunk-40-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-41-1.svg)&lt;!-- --&gt;
 
 --
 
@@ -1582,7 +1591,7 @@ Inclus :
 
 - `theme_bw()` : noir et blanc
 
-![](index_files/figure-html/unnamed-chunk-41-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-42-1.svg)&lt;!-- --&gt;
 
 ---
 
@@ -1592,7 +1601,7 @@ Inclus :
 
 - `theme_minimal()` : minimaliste
 
-![](index_files/figure-html/unnamed-chunk-42-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-43-1.svg)&lt;!-- --&gt;
 
 
 ---
@@ -1603,7 +1612,7 @@ Inclus :
 
 - `theme_gray()` : gris
 
-![](index_files/figure-html/unnamed-chunk-43-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-44-1.svg)&lt;!-- --&gt;
 
 ---
 
@@ -1613,7 +1622,7 @@ Package ![:package_cran ggthemes] :
 
 - `theme_fivethirtyeight()`
 
-![](index_files/figure-html/unnamed-chunk-44-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-45-1.svg)&lt;!-- --&gt;
 
 ---
 
@@ -1623,7 +1632,7 @@ Package ![:package_cran ggthemes] :
 
 - `theme_few()`
 
-![](index_files/figure-html/unnamed-chunk-45-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-46-1.svg)&lt;!-- --&gt;
 
 ---
 
@@ -1633,11 +1642,11 @@ Package ![:package_cran ggthemes] :
 
 - `theme_excel()`
 
-![](index_files/figure-html/unnamed-chunk-46-1.svg)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-47-1.svg)&lt;!-- --&gt;
 
 --
 
-&lt;img src="https://media0.giphy.com/media/njl60xjwgrkWY/giphy.gif?cid=3640f6095c981f27764b434a323926c1" width="60%" class='image-popup-center'/&gt;
+&lt;img src="https://media0.giphy.com/media/njl60xjwgrkWY/giphy.gif?cid=3640f6095c981f27764b434a323926c1" class='image-popup-center' style='left: 80%; top: 20%; width: 30%'/&gt;
 
 
 ---
@@ -1789,7 +1798,7 @@ p &lt;- mtcars_with_models %&gt;%
 ]
 
 .right-plot[
-&lt;img src="index_files/figure-html/unnamed-chunk-50-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-51-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
 ]
 
 
@@ -1820,7 +1829,7 @@ mtcars_with_models %&gt;%
 ```
 ]
 .right-plot-30[
-&lt;img src="index_files/figure-html/unnamed-chunk-52-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-53-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1846,7 +1855,7 @@ mtcars_with_models %&gt;%
 ```
 ]
 .right-plot-30[
-&lt;img src="index_files/figure-html/unnamed-chunk-54-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-55-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1871,11 +1880,11 @@ mtcars_with_models %&gt;%
 ```
 ]
 .right-plot-30[
-&lt;img src="index_files/figure-html/unnamed-chunk-56-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-57-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
 ]
 
 .footnote[
-[1] Mon approche préféré !
+[1] Mon approche préférée !
 ]
 
 ---
@@ -1904,7 +1913,7 @@ mtcars_with_models %&gt;%
 ```
 ]
 .right-plot-30[
-&lt;img src="index_files/figure-html/unnamed-chunk-58-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-59-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
 ]
 .footnote[
 [1] Pourquoi est-ce que `my_filter` arrive à bien trouver `heavy_cars` ? ( difficile ! )   
@@ -1939,7 +1948,7 @@ mtcars_with_models %&gt;%
 ```
 ]
 .right-plot-30[
-&lt;img src="index_files/figure-html/unnamed-chunk-60-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-61-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
 ]
 
 .footnote[
@@ -1973,6 +1982,7 @@ class: center, middle, inverse
 ![:package_cran ggraph] : **grammaire des graphs** 
 - Deux `data.frames` : noeds et liens...
 
+
 ---
 class: slide-class-advanced
 
@@ -1996,10 +2006,11 @@ pl &lt;- ggplot(mtcars, aes(x = mpg, y = wt)) + geom_point()
 ```
 
 
-&lt;iframe src="widgets/plotly_figure.html" width="600" height="300" scrolling="no" seamless="seamless" frameBorder="0"&gt;&lt;/iframe&gt;
+&lt;iframe src="widgets/plotly_figure.html" width="100%" height="250" scrolling="no" seamless="seamless" frameBorder="0"&gt;&lt;/iframe&gt;
 
 
 ---
+
 # Animations
 
 Package ![:package_cran gganimate]
@@ -2059,7 +2070,6 @@ ggplot(shp) +
 
 ---
 class: small-code slide-class-advanced
-exclude: true
 
 # Graphs
 
