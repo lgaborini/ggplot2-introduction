@@ -1,7 +1,7 @@
 # Introduction à ggplot2
 
 This repository contains the slides and the material for the Café des Doctorants.    
-It is a throrough introduction to ggplot2, with some advanced concepts.
+It is a quite thorough introduction to ggplot2, with some advanced concepts.
 
 ⚠ Written in French! ⚠
 
