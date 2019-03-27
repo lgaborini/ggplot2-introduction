@@ -6,7 +6,7 @@ It is a quite thorough introduction to 📦 [`ggplot2`](https://cran.r-project.o
 ⚠ Written in French! ⚠
 
 [Browse the slides](https://lgaborini.github.io/ggplot2-introduction/)!    
-[Download the slides in PDF](docs/index.pdf)! (not always updated)
+[Download the slides in PDF](https://lgaborini.github.io/ggplot2-introduction/index.pdf)! (not always updated)
 
 ## Prerequisites
 
