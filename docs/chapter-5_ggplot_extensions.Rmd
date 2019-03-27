@@ -131,6 +131,7 @@ ggplot(shp) +
 
 ---
 class: small-code slide-class-advanced
+exclude: true
 
 # Graphs
 
