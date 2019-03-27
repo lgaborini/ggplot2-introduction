@@ -20,7 +20,7 @@ class: center, middle, inverse
 - [vignette](https://cran.r-project.org/web/packages/gghighlight/vignettes/gghighlight.html)
 
 ![:package_cran ggraph] : **grammaire des graphs** 
-- Deux `data.frames` : noeds et liens...
+- Deux `data.frames` : nœuds et liens...
 
 
 ---
@@ -28,7 +28,7 @@ class: slide-class-advanced
 
 # plotly
 
-- Package ![:package_cran plotly] : librarie similaire à `ggplot2`, mais interactive !
+- Package ![:package_cran plotly] : librairie similaire à `ggplot2`, mais interactive (touchez les slides ! )
 
 --
 

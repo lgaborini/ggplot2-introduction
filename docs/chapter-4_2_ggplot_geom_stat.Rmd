@@ -32,7 +32,7 @@ Mini-guide : 📖 [Data visualization cheatsheet](https://github.com/rstudio/che
 
 --
 
-### Anatomie d'une géometrie :  
+### Anatomie d'une géométrie :  
 
 - `geom_*(mapping = ..., data = ..., stat = ..., position = ..., ...)`
 - `mapping` spécifie les **esthétiques** (correspondances entre variables)

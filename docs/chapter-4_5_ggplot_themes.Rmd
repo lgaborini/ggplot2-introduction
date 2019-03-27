@@ -138,7 +138,7 @@ p + theme(
 
 # Thèmes : un exemple 
 
-Etiquettes axe x  
+Étiquettes axe x  
 
 ```{r theme-slide-prog-7, fig.height=4, opts.extra='style="position:absolute; top=55%"'}
 p + theme(

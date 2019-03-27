@@ -279,7 +279,7 @@ class: center, middle, inverse
    + rangement : `arrange`
    + résumé : `summarise`
 
-- Connexions avec les bases des données plus commmunes (p.ex. sqlite)
+- Connexions avec les bases des données plus communes (p.ex. sqlite)
 
 --
 
